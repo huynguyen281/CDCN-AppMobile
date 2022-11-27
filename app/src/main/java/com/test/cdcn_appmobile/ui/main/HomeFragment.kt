@@ -1,4 +1,4 @@
-package com.test.cdcn_appmobile.ui.home
+package com.test.cdcn_appmobile.ui.main
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,8 +1,6 @@
 package com.test.cdcn_appmobile.ui.launch.login
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.text.Editable
 import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +13,7 @@ import com.test.cdcn_appmobile.databinding.FragmentLoginBinding
 import com.test.cdcn_appmobile.extension.addTextChangedListener
 import com.test.cdcn_appmobile.extension.replaceFragment
 import com.test.cdcn_appmobile.extension.setVisibility
-import com.test.cdcn_appmobile.ui.home.HomeFragment
+import com.test.cdcn_appmobile.ui.main.HomeFragment
 import com.test.cdcn_appmobile.ui.launch.LaunchViewModel
 import com.test.cdcn_appmobile.ui.launch.signup.SignUpFragment
 import com.test.cdcn_appmobile.utils.Constant

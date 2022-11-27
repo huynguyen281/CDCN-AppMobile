@@ -1,4 +1,4 @@
-package com.test.cdcn_appmobile.ui.main
+package com.test.cdcn_appmobile.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
