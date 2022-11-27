@@ -1,7 +1,8 @@
-package com.test.cdcn_appmobile
+package com.test.cdcn_appmobile.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.test.cdcn_appmobile.R
 import com.test.cdcn_appmobile.extension.addFragment
 import com.test.cdcn_appmobile.ui.launch.login.LoginFragment
 
