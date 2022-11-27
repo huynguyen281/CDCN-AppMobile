@@ -1,3 +1,27 @@
 <resources>
-    <string name="app_name">MoneyManager</string>
+    <string name="app_name">CDCN-AppMobile</string>
+
+    <!--    FragmentLogin-->
+    <string name="LoginTvWelcome">Welcome</string>
+    <string name="LoginTvNotification">Please Log into your existing  account</string>
+    <string name="LoginYourMail">Your Email</string>
+    <string name="LoginYourPass">Your Password</string>
+    <string name="LoginBtnLogin">Login</string>
+    <string name="LoginBtnSignUp">Sign up?</string>
+    <string name="LoginForgotPass">Forgot your password?</string>
+    <string name="LoginLoginSuccess">Login Success</string>
+    <string name="LoginLoginFail">Login Fail, Wrong Email or Password</string>
+
+    <!--    FragmentSignUp-->
+    <string name="SignUpTvInfo">Please input information</string>
+    <string name="SignUpBtnSignUp">Sign Up</string>
+    <string name="SignUpMoveToLogin">Move to login</string>
+    <string name="SignUpCongratulations">Congratulations</string>
+    <string name="SignUpRegisterDone">You have successfully registered!!!</string>
+    <string name="SignUpCancel">Cancel</string>
+    <string name="SignUpExistsEmail">Existed Email %s</string>
+
+    <!--    FragmentDialog-->
+    <string name="DialogBtnConfirm">Confirm</string>
+    <string name="DialogBtnNegative">Negative</string>
 </resources>
