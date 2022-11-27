@@ -7,17 +7,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.test.cdcn_appmobile.R
 import com.test.cdcn_appmobile.data.models.User
 import com.test.cdcn_appmobile.databinding.FragmentSignUpBinding
 import com.test.cdcn_appmobile.extension.addTextChangedListener
 import com.test.cdcn_appmobile.extension.backToPreFragment
 import com.test.cdcn_appmobile.extension.setVisibility
-import com.test.cdcn_appmobile.extension.showDialogFrag
 import com.test.cdcn_appmobile.ui.launch.LaunchViewModel
+import com.test.cdcn_appmobile.ui.launch.login.LoginFragment
+import com.test.cdcn_appmobile.utils.Constant
 import com.test.cdcn_appmobile.utils.InjectorUtil
 
-class SignUpFragment : Fragment() {
+class SignUpFragment() : Fragment() {
 
     private var binding: FragmentSignUpBinding? = null
     private var launchViewModel: LaunchViewModel? = null
@@ -53,55 +53,65 @@ class SignUpFragment : Fragment() {
 
         binding?.run {
 
-            btnMoveLogin.setOnClickListener {
+            tvLoginOpen.setOnClickListener {
                 activity?.backToPreFragment()
             }
 
-            edtEmailSignUp.addTextChangedListener {
+            edtSignupEmail.addTextChangedListener {
                 if (!firstTimeClick)
                     tvWarningEmail.text = launchViewModel?.validEmail(it)
             }
 
-            edtPassSignUp.addTextChangedListener {
-                if (!firstTimeClick)
+            edtSignupPw1.addTextChangedListener {
+                if (!firstTimeClick) {
                     tvWarningPass.text = launchViewModel?.validPassWord(it)
+                    tvWarningConfirm.text =
+                        if (edtSignupPw2.text.toString() == edtSignupPw1.text.toString()
+                        ) "" else "Mật khẩu không trùng khớp"
+                }
             }
 
-            btnSignUpFragment.setOnClickListener {
-                firstTimeClick = false
-                tvWarningEmail.text =
-                    launchViewModel?.validEmail(edtEmailSignUp.text.toString())
-                tvWarningPass.text =
-                    launchViewModel?.validPassWord(edtPassSignUp.text.toString())
+            edtSignupPw2.addTextChangedListener {
+                if (!firstTimeClick)
+                    tvWarningConfirm.text =
+                        if (edtSignupPw2.text.toString() == edtSignupPw1.text.toString()
+                        ) "" else "Mật khẩu không trùng khớp"
+            }
 
-                if (tvWarningEmail.text.toString() == "" && tvWarningPass.text.toString() == "") {
-                    launchViewModel?.insertUser(
+            btnSignup.setOnClickListener {
+                firstTimeClick = false
+
+                tvWarningEmail.text =
+                    launchViewModel?.validEmail(edtSignupEmail.text.toString())
+                tvWarningPass.text =
+                    launchViewModel?.validPassWord(edtSignupPw1.text.toString())
+                tvWarningConfirm.text =
+                    if (edtSignupPw2.text.toString() == edtSignupPw1.text.toString()
+                    ) "" else "Mật khẩu không trùng khớp"
+
+                if (tvWarningEmail.text.toString() == "" && tvWarningPass.text.toString() == "" && tvWarningConfirm.text.toString() == "") {
+                    launchViewModel?.register(
                         User(
                             id = "",
-                            email = edtEmailSignUp.text.toString().trim(),
-                            password = edtPassSignUp.text.toString().trim(),
-                            name = edtEmailSignUp.text.toString().trim().split("@")[0]
+                            userName = "",
+                            email = edtSignupEmail.text.toString().trim(),
+                            password = edtSignupPw1.text.toString().trim(),
+                            name = edtSignupName.text.toString().trim(),
+                            tokenJWT = ""
                         ), onStart = {
-                            ctProgressBar.setVisibility(true)
-                        }, onResult = {
-                            ctProgressBar.setVisibility(false)
-                            if (it) {
-                                activity?.showDialogFrag(
-                                    requireActivity().resources.getString(R.string.SignUpCongratulations),
-                                    requireActivity().resources.getString(R.string.SignUpRegisterDone),
-                                    requireActivity().resources.getString(R.string.SignUpMoveToLogin),
-                                    requireActivity().resources.getString(R.string.SignUpCancel),
-                                    negative_callback = {
-                                        activity?.backToPreFragment()
-                                    }
-                                )
+                            viewBg.setVisibility(true)
+                            progressBar.setVisibility(true)
+                        }, onResult = { done, message ->
+                            viewBg.setVisibility(false)
+                            progressBar.setVisibility(false)
+                            if (done) {
+                                Constant.USER.email = edtSignupEmail.text.toString().trim()
+                                Constant.USER.password = edtSignupPw1.text.toString().trim()
+                                activity?.backToPreFragment()
                             } else {
                                 Toast.makeText(
                                     requireContext(),
-                                    requireActivity().resources.getString(
-                                        R.string.SignUpExistsEmail,
-                                        edtEmailSignUp.text.toString().trim()
-                                    ),
+                                    message,
                                     Toast.LENGTH_LONG
                                 ).show()
                             }

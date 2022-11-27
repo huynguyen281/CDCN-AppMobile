@@ -1,6 +1,9 @@
 package com.test.cdcn_appmobile.ui.launch.login
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.text.Editable
+import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +15,10 @@ import com.test.cdcn_appmobile.databinding.FragmentLoginBinding
 import com.test.cdcn_appmobile.extension.addTextChangedListener
 import com.test.cdcn_appmobile.extension.replaceFragment
 import com.test.cdcn_appmobile.extension.setVisibility
+import com.test.cdcn_appmobile.ui.home.HomeFragment
 import com.test.cdcn_appmobile.ui.launch.LaunchViewModel
 import com.test.cdcn_appmobile.ui.launch.signup.SignUpFragment
+import com.test.cdcn_appmobile.utils.Constant
 import com.test.cdcn_appmobile.utils.InjectorUtil
 
 class LoginFragment : Fragment() {
@@ -47,14 +52,19 @@ class LoginFragment : Fragment() {
             )[LaunchViewModel::class.java]
 
         binding?.run {
-
+            if (Constant.USER.email != "") {
+                edtLoginUser.text = SpannableStringBuilder(Constant.USER.email)
+            }
+            if (Constant.USER.password != "") {
+                edtLoginPass.text = SpannableStringBuilder(Constant.USER.password)
+            }
         }
     }
 
     private fun initListener() {
         //init Listener
         binding?.run {
-            btnSignUp.setOnClickListener {
+            tvSignupOpen.setOnClickListener {
                 activity?.replaceFragment(
                     R.id.ctReplaceFragment,
                     SignUpFragment(),
@@ -63,12 +73,12 @@ class LoginFragment : Fragment() {
                 )
             }
 
-            edtEmail.addTextChangedListener {
+            edtLoginUser.addTextChangedListener {
                 if (!firstTimeClick)
                     tvWarningEmailLogin.text = launchViewModel?.validEmail(it)
             }
 
-            edtPassword.addTextChangedListener {
+            edtLoginPass.addTextChangedListener {
                 if (!firstTimeClick)
                     tvWarningPassLogin.text = launchViewModel?.validPassWord(it)
             }
@@ -76,24 +86,33 @@ class LoginFragment : Fragment() {
             btnLogin.setOnClickListener {
                 firstTimeClick = false
                 tvWarningEmailLogin.text =
-                    launchViewModel?.validEmail(edtEmail.text.toString())
+                    launchViewModel?.validEmail(edtLoginUser.text.toString())
                 tvWarningPassLogin.text =
-                    launchViewModel?.validPassWord(edtPassword.text.toString())
+                    launchViewModel?.validPassWord(edtLoginPass.text.toString())
 
                 if (tvWarningEmailLogin.text.toString() == "" && tvWarningPassLogin.text.toString() == "") {
-                    launchViewModel?.loginUser(edtEmail.text.toString(),
-                        edtPassword.text.toString(),
+                    launchViewModel?.loginUser(edtLoginUser.text.toString(),
+                        edtLoginPass.text.toString(),
                         onStart = {
-                            ctProgressBar.setVisibility(true)
+                            viewBg.setVisibility(true)
+                            progressBar.setVisibility(true)
+                            layoutUser.setVisibility(false)
+                            layoutPass.setVisibility(false)
+                            tvForgotpassOpen.setVisibility(false)
                         },
-                        onResult = {
-                            ctProgressBar.setVisibility(false)
-                            if (it != null) {
-
+                        onResult = { done, message ->
+                            viewBg.setVisibility(false)
+                            progressBar.setVisibility(false)
+                            layoutUser.setVisibility(true)
+                            layoutPass.setVisibility(true)
+                            tvForgotpassOpen.setVisibility(true)
+                            if (done) {
+                                requireActivity().replaceFragment(R.id.ctReplaceFragment,
+                                    HomeFragment())
                             } else {
                                 Toast.makeText(
                                     requireContext(),
-                                    R.string.LoginLoginFail,
+                                    message,
                                     Toast.LENGTH_LONG
                                 ).show()
                             }
@@ -103,4 +122,10 @@ class LoginFragment : Fragment() {
         }
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        initView()
+    }
+
 }

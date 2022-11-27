@@ -17,4 +17,9 @@
     <color name="colorCyanAzure">#4f81bc</color>
     <color name="colorVenetianRed">#c0504e</color>
     <color name="colorMiddleGreenYellow">#98bb55</color>
+    <color name="lightest_orange">#FFFCFA</color>
+    <color name="grey">#8C8B8B</color>
+    <color name="primaryColor">#E48D41</color>
+    <color name="darkOrange">#C16413</color>
+    <color name="light_orange">#FDF3EA</color>
 </resources>

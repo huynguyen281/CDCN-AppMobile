@@ -10,7 +10,7 @@ import com.test.cdcn_appmobile.ui.launch.LaunchViewModelFactory
 object InjectorUtil {
 
     fun provideUserViewModelFactory(): LaunchViewModelFactory {
-        val userRepository = UserRepository()
+        val userRepository = UserRepository
         return LaunchViewModelFactory(userRepository)
     }
 }
