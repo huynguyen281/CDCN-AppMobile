@@ -1,0 +1,106 @@
+package com.test.cdcn_appmobile.ui.launch.login
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import com.test.cdcn_appmobile.R
+import com.test.cdcn_appmobile.databinding.FragmentLoginBinding
+import com.test.cdcn_appmobile.extension.addTextChangedListener
+import com.test.cdcn_appmobile.extension.replaceFragment
+import com.test.cdcn_appmobile.extension.setVisibility
+import com.test.cdcn_appmobile.ui.launch.LaunchViewModel
+import com.test.cdcn_appmobile.ui.launch.signup.SignUpFragment
+import com.test.cdcn_appmobile.utils.InjectorUtil
+
+class LoginFragment : Fragment() {
+
+    private var binding: FragmentLoginBinding? = null
+    private var launchViewModel: LaunchViewModel? = null
+    private var firstTimeClick = true
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
+        // Inflate the layout for this fragment
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
+        return binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
+        initListener()
+    }
+
+    private fun initView() {
+        //init View
+        launchViewModel =
+            ViewModelProvider(
+                requireActivity(),
+                InjectorUtil.provideUserViewModelFactory()
+            )[LaunchViewModel::class.java]
+
+        binding?.run {
+
+        }
+    }
+
+    private fun initListener() {
+        //init Listener
+        binding?.run {
+            btnSignUp.setOnClickListener {
+                activity?.replaceFragment(
+                    R.id.ctReplaceFragment,
+                    SignUpFragment(),
+                    true,
+                    for_signUp = true
+                )
+            }
+
+            edtEmail.addTextChangedListener {
+                if (!firstTimeClick)
+                    tvWarningEmailLogin.text = launchViewModel?.validEmail(it)
+            }
+
+            edtPassword.addTextChangedListener {
+                if (!firstTimeClick)
+                    tvWarningPassLogin.text = launchViewModel?.validPassWord(it)
+            }
+
+            btnLogin.setOnClickListener {
+                firstTimeClick = false
+                tvWarningEmailLogin.text =
+                    launchViewModel?.validEmail(edtEmail.text.toString())
+                tvWarningPassLogin.text =
+                    launchViewModel?.validPassWord(edtPassword.text.toString())
+
+                if (tvWarningEmailLogin.text.toString() == "" && tvWarningPassLogin.text.toString() == "") {
+                    launchViewModel?.loginUser(edtEmail.text.toString(),
+                        edtPassword.text.toString(),
+                        onStart = {
+                            ctProgressBar.setVisibility(true)
+                        },
+                        onResult = {
+                            ctProgressBar.setVisibility(false)
+                            if (it != null) {
+
+                            } else {
+                                Toast.makeText(
+                                    requireContext(),
+                                    R.string.LoginLoginFail,
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+                        })
+                }
+            }
+        }
+
+    }
+}
