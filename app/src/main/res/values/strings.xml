@@ -29,4 +29,8 @@
     <string name="budgetMenu">Ngân Sách</string>
     <string name="statisticalMenu">Thống kê</string>
     <string name="limitedSpend">Tình trạng tài chính</string>
+    <string name="moneySpent">Tiền đã chi</string>
+    <string name="moneyReceived">Tiền đã thu</string>
+    <string name="month">Tháng:</string>
+    <string name="year">Năm:</string>
 </resources>
