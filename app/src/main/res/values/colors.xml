@@ -22,4 +22,5 @@
     <color name="primaryColor">#E48D41</color>
     <color name="darkOrange">#C16413</color>
     <color name="light_orange">#FDF3EA</color>
+    <color name="border_color">#CACACA</color>
 </resources>

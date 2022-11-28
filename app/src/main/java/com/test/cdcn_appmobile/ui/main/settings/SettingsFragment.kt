@@ -1,19 +1,19 @@
-package com.test.cdcn_appmobile.ui.home
+package com.test.cdcn_appmobile.ui.main.settings
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.test.cdcn_appmobile.databinding.FragmentHomeBinding
+import com.test.cdcn_appmobile.databinding.FragmentSettingsBinding
 
 /*
  * Created by tuyen.dang on 11/27/2022
  */
 
-class HomeFragment : Fragment() {
+class SettingsFragment : Fragment() {
 
-    private var binding: FragmentHomeBinding? = null
+    private var binding: FragmentSettingsBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,7 +21,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding = FragmentSettingsBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
@@ -38,4 +38,5 @@ class HomeFragment : Fragment() {
     private fun initListener() {
 
     }
+
 }

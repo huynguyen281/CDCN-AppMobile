@@ -24,4 +24,8 @@
     <!--    FragmentDialog-->
     <string name="DialogBtnConfirm">Confirm</string>
     <string name="DialogBtnNegative">Negative</string>
+    <string name="transactionMenu">Chi Tiêu</string>
+    <string name="settingMenu">Cài Đặt</string>
+    <string name="budgetMenu">Ngân Sách</string>
+    <string name="statisticalMenu">Thống kê</string>
 </resources>
