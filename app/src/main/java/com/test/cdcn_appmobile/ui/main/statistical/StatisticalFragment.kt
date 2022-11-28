@@ -1,19 +1,19 @@
-package com.test.cdcn_appmobile.ui.main.settings
+package com.test.cdcn_appmobile.ui.main.statistical
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.test.cdcn_appmobile.databinding.FragmentSettingsBinding
+import com.test.cdcn_appmobile.databinding.FragmentStatisticalBinding
 
 /*
- * Created by tuyen.dang on 11/27/2022
+ * Created by tuyen.dang on 11/28/2022
  */
 
-class SettingsFragment : Fragment() {
+class StatisticalFragment : Fragment() {
 
-    private var binding: FragmentSettingsBinding? = null
+    private var binding: FragmentStatisticalBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,7 +21,7 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentSettingsBinding.inflate(inflater, container, false)
+        binding = FragmentStatisticalBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
@@ -38,5 +38,4 @@ class SettingsFragment : Fragment() {
     private fun initListener() {
 
     }
-
 }
