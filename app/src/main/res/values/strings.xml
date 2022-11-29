@@ -39,4 +39,8 @@
     <string name="monthly">Hàng tháng</string>
     <string name="yearly">Hàng năm</string>
     <string name="budget">Ngân sách còn lại</string>
+
+<!--    FragmentStatistical-->
+    <string name="byMonth">Theo Ngày Trong Tháng</string>
+    <string name="byYear">Theo Tháng Trong Năm</string>
 </resources>

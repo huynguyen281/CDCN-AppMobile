@@ -3,7 +3,7 @@
 
     <gradient
         android:startColor="@color/colorHotMagenta"
-        android:endColor="@color/colorDarkViolet"/>
+        android:endColor="@color/primaryColor"/>
 
     <corners
         android:radius="25dp"/>
