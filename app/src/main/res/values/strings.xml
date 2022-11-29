@@ -33,4 +33,10 @@
     <string name="moneyReceived">Tiền đã thu</string>
     <string name="month">Tháng:</string>
     <string name="year">Năm:</string>
+    <string name="limited">Hạn mức</string>
+    <string name="loop">Lặp lại:</string>
+    <string name="daily">Hàng ngày</string>
+    <string name="monthly">Hàng tháng</string>
+    <string name="yearly">Hàng năm</string>
+    <string name="budget">Ngân sách còn lại</string>
 </resources>
