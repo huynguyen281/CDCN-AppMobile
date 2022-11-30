@@ -97,17 +97,25 @@
                 app:layout_constraintStart_toEndOf="@+id/textView6"
                 app:layout_constraintTop_toTopOf="@+id/textView6" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <HorizontalScrollView
                 android:id="@+id/layoutGraph"
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_marginTop="40dp"
+                android:scrollbars="none"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.49"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView2">
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                tools:ignore="SpeakableTextPresentCheck">
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="500dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/ic_graph" />
+            </HorizontalScrollView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/layoutCalculator"
@@ -126,9 +134,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/moneyReceived"
-                    app:layout_constraintBottom_toBottomOf="@+id/tvMoneyReceived"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvMoneyLimited"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/tvMoneyReceived"
+                    app:layout_constraintTop_toTopOf="@+id/tvMoneyLimited"
                     tools:ignore="TextContrastCheck,TextContrastCheck" />
 
                 <TextView
@@ -143,7 +151,7 @@
                     tools:ignore="TextContrastCheck,TextContrastCheck,TextContrastCheck,TextContrastCheck,TextContrastCheck" />
 
                 <TextView
-                    android:id="@+id/tvMoneyReceived"
+                    android:id="@+id/tvMoneyLimited"
                     style="@style/textViewAddMoney"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -161,8 +169,8 @@
                     android:layout_marginTop="10dp"
                     android:text="-5,000.00 đ"
                     app:layout_constraintBottom_toTopOf="@+id/textView14"
-                    app:layout_constraintEnd_toEndOf="@+id/tvMoneyReceived"
-                    app:layout_constraintTop_toBottomOf="@+id/tvMoneyReceived" />
+                    app:layout_constraintEnd_toEndOf="@+id/tvMoneyLimited"
+                    app:layout_constraintTop_toBottomOf="@+id/tvMoneyLimited" />
 
                 <TextView
                     android:id="@+id/textView14"

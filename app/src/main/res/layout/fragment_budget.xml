@@ -13,7 +13,7 @@
         app:layout_constraintBottom_toTopOf="@+id/textView8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription,ImageContrastCheck" />
 
     <TextView
         android:id="@+id/textView7"
@@ -43,17 +43,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8"
         app:srcCompat="@drawable/ic_money"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription,ImageContrastCheck" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
         android:layout_width="0dp"
         android:layout_height="50dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
         android:background="@color/white"
         app:boxStrokeWidth="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView2"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textView"
         app:layout_constraintStart_toEndOf="@+id/imageView2"
         app:layout_constraintTop_toTopOf="@+id/imageView2">
 
@@ -66,12 +65,15 @@
             android:autoSizeStepGranularity="1sp"
             android:autoSizeTextType="uniform"
             android:background="@color/white"
+            android:enabled="false"
             android:hint="@string/limited"
             android:importantForAutofill="no"
-            android:inputType="text|numberDecimal"
+            android:inputType="number"
+            android:maxLength="11"
             android:textColor="@color/primaryColor"
-            android:textColorHint="#B3E48D41"
-            tools:ignore="SpeakableTextPresentCheck" />
+            android:textColorHint="@color/primaryColor"
+            tools:ignore="SpeakableTextPresentCheck"
+            tools:targetApi="o" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,14 +88,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:srcCompat="@drawable/ic_calendar"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription,ImageContrastCheck" />
 
     <TextView
         android:id="@+id/textView11"
         style="@style/textViewMoney"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="15dp"
         android:gravity="start|center_vertical"
         android:text="@string/loop"
         android:textSize="16sp"
@@ -101,27 +103,30 @@
         app:layout_constraintEnd_toStartOf="@+id/tvLoopUnit"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+        app:layout_constraintTop_toTopOf="@+id/imageView4"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/tvLoopUnit"
         style="@style/textViewMoney"
         android:layout_height="0dp"
+        android:enabled="false"
         android:gravity="center_vertical|end"
         android:paddingStart="10dp"
         android:text="@string/daily"
         app:layout_constraintBottom_toBottomOf="@+id/textView11"
-        app:layout_constraintEnd_toStartOf="@+id/imageView5"
+        app:layout_constraintEnd_toStartOf="@+id/btnLoopUnit"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView11"
         app:layout_constraintTop_toTopOf="@+id/textView11"
-        tools:ignore="RtlSymmetry" />
+        tools:ignore="RtlSymmetry,TextContrastCheck" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/btnLoopUnit"
         style="@style/imageViewShow"
         android:layout_marginEnd="10dp"
         android:adjustViewBounds="true"
+        android:enabled="false"
         android:padding="15dp"
         android:src="@drawable/ic_arrow_right"
         app:layout_constraintBottom_toBottomOf="@+id/tvLoopUnit"
@@ -129,7 +134,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tvLoopUnit"
         app:layout_constraintTop_toTopOf="@+id/tvLoopUnit"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription,ImageContrastCheck" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutCalculator"
@@ -148,19 +153,15 @@
         <TextView
             android:id="@+id/textView10"
             style="@style/textViewTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="@string/limited"
-            app:layout_constraintBottom_toBottomOf="@+id/tvMoneyReceived"
+            app:layout_constraintBottom_toBottomOf="@+id/tvMoneyLimited"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvMoneyReceived"
+            app:layout_constraintTop_toTopOf="@+id/tvMoneyLimited"
             tools:ignore="TextContrastCheck,TextContrastCheck" />
 
         <TextView
             android:id="@+id/textView12"
             style="@style/textViewTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="@string/moneySpent"
             app:layout_constraintBottom_toBottomOf="@+id/tvMoneySpent"
             app:layout_constraintStart_toStartOf="parent"
@@ -168,11 +169,8 @@
             tools:ignore="TextContrastCheck,TextContrastCheck,TextContrastCheck,TextContrastCheck,TextContrastCheck" />
 
         <TextView
-            android:id="@+id/tvMoneyReceived"
+            android:id="@+id/tvMoneyLimited"
             style="@style/textViewAddMoney"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+10,000.00 đ"
             app:layout_constraintBottom_toTopOf="@+id/tvMoneySpent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -181,13 +179,11 @@
         <TextView
             android:id="@+id/tvMoneySpent"
             style="@style/textViewAddMoney"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="-5,000.00 đ"
+            android:textColor="@color/colorVenetianRed"
             app:layout_constraintBottom_toTopOf="@+id/textView14"
-            app:layout_constraintEnd_toEndOf="@+id/tvMoneyReceived"
-            app:layout_constraintTop_toBottomOf="@+id/tvMoneyReceived" />
+            app:layout_constraintEnd_toEndOf="@+id/tvMoneyLimited"
+            app:layout_constraintTop_toBottomOf="@+id/tvMoneyLimited" />
 
         <TextView
             android:id="@+id/textView14"
@@ -203,13 +199,12 @@
         <TextView
             android:id="@+id/tvBudget"
             style="@style/textViewMoney"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="+5,000.00 đ"
+            android:textColor="@color/text_item_expenditure"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/textView14"
-            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+            app:layout_constraintTop_toBottomOf="@+id/textView14"
+            tools:ignore="TextContrastCheck" />
 
         <TextView
             android:id="@+id/textView17"
@@ -217,7 +212,9 @@
             android:text="@string/budget"
             app:layout_constraintBottom_toBottomOf="@+id/tvBudget"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tvBudget" />
+            app:layout_constraintTop_toTopOf="@+id/tvBudget"
+            tools:ignore="TextContrastCheck" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
@@ -227,7 +224,8 @@
         android:layout_marginTop="44dp"
         android:text="@string/limitedSpend"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        tools:ignore="TextContrastCheck" />
 
     <ImageView
         android:id="@+id/viewBg"
@@ -240,10 +238,10 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="ContentDescription" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -254,8 +252,18 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/TextTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:text="đ"
+        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textInputLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

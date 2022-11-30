@@ -13,7 +13,6 @@ import com.test.cdcn_appmobile.extension.addTextChangedListener
 import com.test.cdcn_appmobile.extension.backToPreFragment
 import com.test.cdcn_appmobile.extension.setVisibility
 import com.test.cdcn_appmobile.ui.launch.LaunchViewModel
-import com.test.cdcn_appmobile.ui.launch.login.LoginFragment
 import com.test.cdcn_appmobile.utils.Constant
 import com.test.cdcn_appmobile.utils.InjectorUtil
 
@@ -44,7 +43,7 @@ class SignUpFragment() : Fragment() {
         launchViewModel =
             ViewModelProvider(
                 requireActivity(),
-                InjectorUtil.provideUserViewModelFactory()
+                InjectorUtil.provideLaunchViewModelFactory()
             )[LaunchViewModel::class.java]
 
     }
@@ -90,6 +89,8 @@ class SignUpFragment() : Fragment() {
                     ) "" else "Mật khẩu không trùng khớp"
 
                 if (tvWarningEmail.text.toString() == "" && tvWarningPass.text.toString() == "" && tvWarningConfirm.text.toString() == "") {
+                    viewBg.setVisibility(true)
+                    progressBar.setVisibility(true)
                     launchViewModel?.register(
                         User(
                             id = "",
@@ -98,10 +99,7 @@ class SignUpFragment() : Fragment() {
                             password = edtSignupPw1.text.toString().trim(),
                             name = edtSignupName.text.toString().trim(),
                             tokenJWT = ""
-                        ), onStart = {
-                            viewBg.setVisibility(true)
-                            progressBar.setVisibility(true)
-                        }, onResult = { done, message ->
+                        ), onResult = { done, message ->
                             viewBg.setVisibility(false)
                             progressBar.setVisibility(false)
                             if (done) {

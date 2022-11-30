@@ -7,6 +7,6 @@ import com.google.gson.annotations.SerializedName
  */
 class ResponseRetrofit<T>(
     @SerializedName("isSuccessed") var isSuccessed: Boolean,
-    @SerializedName("message") var message: String,
+    @SerializedName("message") var message: String?,
     @SerializedName("resultObj") var resultObj: T,
 )

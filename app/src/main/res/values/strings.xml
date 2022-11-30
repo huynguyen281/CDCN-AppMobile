@@ -43,4 +43,5 @@
 <!--    FragmentStatistical-->
     <string name="byMonth">Theo Ngày Trong Tháng</string>
     <string name="byYear">Theo Tháng Trong Năm</string>
+    <string name="tokenJWT">bearer %s</string>
 </resources>
