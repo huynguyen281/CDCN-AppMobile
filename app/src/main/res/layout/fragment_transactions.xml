@@ -134,9 +134,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/moneyReceived"
-                    app:layout_constraintBottom_toBottomOf="@+id/tvMoneyReceived"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvMoneyLimited"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/tvMoneyReceived"
+                    app:layout_constraintTop_toTopOf="@+id/tvMoneyLimited"
                     tools:ignore="TextContrastCheck,TextContrastCheck" />
 
                 <TextView
@@ -151,7 +151,7 @@
                     tools:ignore="TextContrastCheck,TextContrastCheck,TextContrastCheck,TextContrastCheck,TextContrastCheck" />
 
                 <TextView
-                    android:id="@+id/tvMoneyReceived"
+                    android:id="@+id/tvMoneyLimited"
                     style="@style/textViewAddMoney"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -169,8 +169,8 @@
                     android:layout_marginTop="10dp"
                     android:text="-5,000.00 đ"
                     app:layout_constraintBottom_toTopOf="@+id/textView14"
-                    app:layout_constraintEnd_toEndOf="@+id/tvMoneyReceived"
-                    app:layout_constraintTop_toBottomOf="@+id/tvMoneyReceived" />
+                    app:layout_constraintEnd_toEndOf="@+id/tvMoneyLimited"
+                    app:layout_constraintTop_toBottomOf="@+id/tvMoneyLimited" />
 
                 <TextView
                     android:id="@+id/textView14"

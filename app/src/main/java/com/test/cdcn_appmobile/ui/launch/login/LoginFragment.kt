@@ -46,7 +46,7 @@ class LoginFragment : Fragment() {
         launchViewModel =
             ViewModelProvider(
                 requireActivity(),
-                InjectorUtil.provideUserViewModelFactory()
+                InjectorUtil.provideLaunchViewModelFactory()
             )[LaunchViewModel::class.java]
 
         binding?.run {
