@@ -3,6 +3,7 @@ package com.test.cdcn_appmobile.ui.main.budget
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import com.test.cdcn_appmobile.R
 import com.test.cdcn_appmobile.data.models.ItemChoice
 import com.test.cdcn_appmobile.databinding.FragmentBudgetBinding
 import com.test.cdcn_appmobile.extension.setVisibility
+import com.test.cdcn_appmobile.extension.toStringNumber
 import com.test.cdcn_appmobile.ui.dialog.ChoiceFragment
 import com.test.cdcn_appmobile.utils.Constant
 import com.test.cdcn_appmobile.utils.InjectorUtil
@@ -64,10 +66,10 @@ class BudgetFragment : Fragment() {
 
                     setIdUnitChosen(it.unitTime)
 
-                    tvMoneyLimited.text = "${it.limitedMoney} đ"
-                    tvMoneySpent.text = "${it.spendMoney} đ"
+                    tvMoneyLimited.text = "${it.limitedMoney.toStringNumber()} đ"
+                    tvMoneySpent.text = "- ${it.spendMoney.toStringNumber()} đ"
                     tvBudget.run {
-                        text = "${it.remainMoney} đ"
+                        text = "${it.remainMoney.toStringNumber()} đ"
                         isSelected = it.remainMoney >= 0
                     }
                 }
@@ -85,21 +87,21 @@ class BudgetFragment : Fragment() {
                         ItemChoice(
                             0,
                             resources.getString(R.string.daily),
-                            it == 1
+                            it == 0
                         )
                     )
                     listUnitLoop.add(
                         ItemChoice(
                             1,
                             resources.getString(R.string.monthly),
-                            it == 2
+                            it == 1
                         )
                     )
                     listUnitLoop.add(
                         ItemChoice(
                             2,
                             resources.getString(R.string.yearly),
-                            it == 3
+                            it == 2
                         )
                     )
 
@@ -157,6 +159,29 @@ class BudgetFragment : Fragment() {
             btnLoopUnit.setOnClickListener {
                 openDialogChoice()
             }
+
+            edtLimited.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int,
+                ) {
+
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    edtLimited.text =
+                        Editable.Factory.getInstance()
+                            .newEditable(s.toString().toLong().toStringNumber())
+
+                }
+
+            })
         }
     }
 
@@ -170,7 +195,6 @@ class BudgetFragment : Fragment() {
                     Constant.USER.tokenJWT
                 ), Constant.USER.id
             ) { isSuccess, message ->
-                Log.e("TTT", "initData: $message")
                 viewBg.setVisibility(false)
                 progressBar.setVisibility(false)
                 if (!isSuccess) {
@@ -186,6 +210,7 @@ class BudgetFragment : Fragment() {
             resources.getString(R.string.loop),
             itemListener = {
                 budgetViewModel?.setIdUnitChosen(it.id)
+                choiceFragment?.dismiss()
             },
             onChoiceFragHide = {
 

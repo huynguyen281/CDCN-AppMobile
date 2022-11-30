@@ -31,16 +31,12 @@ class LaunchViewModel(private val userRepository: UserRepository) : ViewModel() 
         viewModelScope.launch(Dispatchers.IO) {
             val res = userRepository.login(email, pass)
             res.collect {
-                val message: String
                 if (it.isSuccessed) {
-                    message = "Đăng nhập thành công!!!"
                     Constant.USER = it.resultObj ?: User("", "", "", "", "", "")
                     Constant.USER.password = pass
-                } else {
-                    message = it.message
                 }
                 withContext(Dispatchers.Main) {
-                    onResult(it.isSuccessed, message)
+                    onResult(it.isSuccessed, it.message ?: "")
                 }
             }
         }
@@ -51,7 +47,7 @@ class LaunchViewModel(private val userRepository: UserRepository) : ViewModel() 
             val res = userRepository.register(users.email, users.password, users.name)
             res.collect {
                 withContext(Dispatchers.IO) {
-                    onResult(it.isSuccessed, it.message)
+                    onResult(it.isSuccessed, it.message ?: "")
                 }
             }
         }

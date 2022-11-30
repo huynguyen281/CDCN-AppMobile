@@ -27,6 +27,8 @@ interface ApiService {
         @Header("authorization") token: String,
         @Path("id") idUser: String
     ): Response<ResponseRetrofit<Budget?>>
+
+
     @Headers(
         "Accept: application/json",
         "Content-Type: application/json; charset=utf-8",
@@ -35,6 +37,6 @@ interface ApiService {
     suspend fun updateBudget(
         @Header("authorization") token: String,
         @Path("id") idUser: String,
-        @Body options: Map<String, String>
+        @Body options: Map<String, Long>
     ): Response<ResponseRetrofit<Budget?>>
 }

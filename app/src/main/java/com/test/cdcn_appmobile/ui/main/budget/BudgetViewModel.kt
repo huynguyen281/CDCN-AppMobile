@@ -38,7 +38,7 @@ class BudgetViewModel(private val budgetRepository: BudgetRepository) : ViewMode
                     budget.postValue(result)
                 }
                 withContext(Dispatchers.Main) {
-                    onSuccess(it.isSuccessed, it.message)
+                    onSuccess(it.isSuccessed, it.message ?: "")
                 }
             }
         }
@@ -56,7 +56,7 @@ class BudgetViewModel(private val budgetRepository: BudgetRepository) : ViewMode
         authToken: String,
         idUser: String,
         limitMoney: String,
-        onSuccess: (String) -> Unit
+        onSuccess: (String) -> Unit,
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             budgetRepository.updateBudget(authToken, idUser, limitMoney, idUnitChosen.value ?: 1)
@@ -65,7 +65,7 @@ class BudgetViewModel(private val budgetRepository: BudgetRepository) : ViewMode
                         budget.postValue(result)
                     }
                     withContext(Dispatchers.Main) {
-                        onSuccess(it.message)
+                        onSuccess(it.message ?: "")
                     }
                 }
         }
