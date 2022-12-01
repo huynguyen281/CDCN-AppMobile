@@ -117,14 +117,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2"
                 tools:ignore="SpeakableTextPresentCheck">
-
-
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="500dp"
-                    android:layout_height="match_parent"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_graph" />
             </HorizontalScrollView>
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -169,6 +161,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="+10,000.00 đ"
+                    android:textColor="@color/colorMiddleGreenYellow"
                     app:layout_constraintBottom_toTopOf="@+id/tvMoneySpent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -181,6 +174,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="-5,000.00 đ"
+                    android:textColor="@color/colorVenetianRed"
                     app:layout_constraintBottom_toTopOf="@+id/textView14"
                     app:layout_constraintEnd_toEndOf="@+id/tvMoneyLimited"
                     app:layout_constraintTop_toBottomOf="@+id/tvMoneyLimited" />
@@ -203,6 +197,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="+5,000.00 đ"
+                    android:textColor="@color/text_item_expenditure"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/textView14"
                     app:layout_constraintTop_toBottomOf="@+id/textView14" />
@@ -239,7 +234,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rclViewSpending"
                 android:layout_width="0dp"
-                android:layout_height="500dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"

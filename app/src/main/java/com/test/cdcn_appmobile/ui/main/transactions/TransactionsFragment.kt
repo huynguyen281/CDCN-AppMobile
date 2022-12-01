@@ -16,6 +16,7 @@ import com.test.cdcn_appmobile.data.models.ItemChoice
 import com.test.cdcn_appmobile.databinding.FragmentTransactionsBinding
 import com.test.cdcn_appmobile.extension.OnItemChoice
 import com.test.cdcn_appmobile.extension.setVisibility
+import com.test.cdcn_appmobile.extension.toStringNumber
 import com.test.cdcn_appmobile.ui.dialog.ChoiceFragment
 import com.test.cdcn_appmobile.ui.main.transactions.adapters.DayPickerAdapter
 import com.test.cdcn_appmobile.ui.main.transactions.adapters.ExpenditureAdapter
@@ -29,11 +30,14 @@ import java.util.*
 
 class TransactionsFragment : Fragment() {
 
+    companion object {
+        private var listDay: MutableList<ItemChoice> = ArrayList()
+        private var listMonth: MutableList<ItemChoice> = ArrayList()
+        private var listYear: MutableList<ItemChoice> = ArrayList()
+    }
+
     private var binding: FragmentTransactionsBinding? = null
     private var transactionsViewModel: TransactionsViewModel? = null
-    private var listDay: MutableList<ItemChoice> = ArrayList()
-    private var listMonth: MutableList<ItemChoice> = ArrayList()
-    private var listYear: MutableList<ItemChoice> = ArrayList()
     private var choiceFragment: ChoiceFragment? = null
     private var expenditureAdapter: ExpenditureAdapter? = null
     private var listExpenditure: MutableList<Expenditure> = ArrayList()
@@ -49,18 +53,12 @@ class TransactionsFragment : Fragment() {
         return binding?.root
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-        initDataMonthYear()
-        initDataDay(
-            transactionsViewModel?.getIdMonthChosen()?.value ?: (Calendar.getInstance()
-                .get(Calendar.MONTH) + 1),
-            transactionsViewModel?.getIdYearChosen()?.value ?: Calendar.getInstance()
-                .get(Calendar.YEAR)
-        )
         initListener()
-        if (transactionsViewModel?.getListExpenditure() == null) {
+        if (transactionsViewModel?.getListExpenditure()?.value == null) {
             loadData()
         }
     }
@@ -74,17 +72,20 @@ class TransactionsFragment : Fragment() {
                 InjectorUtil.transactionsViewModelFactory()
             )[TransactionsViewModel::class.java]
 
-        expenditureAdapter = ExpenditureAdapter(listExpenditure) {
 
-        }
-
-        dayPickerAdapter = DayPickerAdapter(listDay) {
-            dayPickerAdapter?.indexSelected = it.id - 1
-            dayPickerAdapter?.notifyDataSetChanged()
-        }
         binding?.run {
 
             transactionsViewModel?.run {
+
+
+                expenditureAdapter = ExpenditureAdapter(listExpenditure) {
+
+                }
+
+                dayPickerAdapter = DayPickerAdapter(listDay) {
+                    setIdDayChosen(it.id)
+                    loadData()
+                }
 
                 getIdYearChosen().observe(viewLifecycleOwner) {
                     btnChoiceYear.text = it.toString()
@@ -102,19 +103,48 @@ class TransactionsFragment : Fragment() {
 
                 getIdDayChosen().observe(viewLifecycleOwner) {
                     listDay.OnItemChoice(it)
+                    dayPickerAdapter?.notifyDataSetChanged()
                 }
 
                 getListExpenditure().observe(viewLifecycleOwner) {
                     it?.let {
                         listExpenditure.clear()
-                        listExpenditure = it
+                        listExpenditure.addAll(it)
                         expenditureAdapter?.notifyDataSetChanged()
+
+                        var allReceiver = 0L
+                        var allSpent = 0L
+                        for (i in listExpenditure) {
+                            if (i.categoryType == 0) {
+                                allReceiver += i.cost
+                            } else {
+                                allSpent += i.cost
+                            }
+                        }
+
+                        tvMoneyLimited.text = "${allReceiver.toStringNumber()}đ"
+                        tvMoneySpent.text = "${allSpent.toStringNumber()}đ"
+                        tvBudget.run {
+                            text = "${(allReceiver - allSpent).toStringNumber()}đ"
+                            isSelected = (allReceiver >= allSpent)
+                        }
+                        tvTotalDay.run {
+                            text = "${allSpent.toStringNumber()}đ"
+                            isSelected = (allReceiver >= allSpent)
+                        }
+
                     }
                 }
 
-                setIdYearChosen(Calendar.getInstance().get(Calendar.YEAR))
-                setIdMonthChosen(Calendar.getInstance().get(Calendar.MONTH) + 1)
-                setIdDayChosen(Calendar.getInstance().get(Calendar.DATE))
+                if (getIdYearChosen().value == null) {
+                    setIdYearChosen(Calendar.getInstance().get(Calendar.YEAR))
+                }
+                if (getIdMonthChosen().value == null) {
+                    setIdMonthChosen(Calendar.getInstance().get(Calendar.MONTH) + 1)
+                }
+                if (getIdDayChosen().value == null) {
+                    setIdDayChosen(Calendar.getInstance().get(Calendar.DATE))
+                }
             }
 
             rclViewSpending.layoutManager = LinearLayoutManager(context)
@@ -122,6 +152,18 @@ class TransactionsFragment : Fragment() {
 
             rclViewDay.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
             rclViewDay.adapter = dayPickerAdapter
+
+            if (listYear.isEmpty() || listMonth.isEmpty()) {
+                initDataMonthYear()
+            }
+            if (listDay.isEmpty()) {
+                initDataDay(
+                    transactionsViewModel?.getIdMonthChosen()?.value ?: (Calendar.getInstance()
+                        .get(Calendar.MONTH) + 1),
+                    transactionsViewModel?.getIdYearChosen()?.value ?: Calendar.getInstance()
+                        .get(Calendar.YEAR)
+                )
+            }
         }
 
     }
@@ -161,12 +203,11 @@ class TransactionsFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     private fun initDataDay(monthChosen: Int, yearChosen: Int) {
         listDay.clear()
-        dayPickerAdapter?.indexSelected = -1
         listExpenditure.clear()
         expenditureAdapter?.notifyDataSetChanged()
         val day = when (monthChosen) {
             2 -> if (yearChosen % 4 == 0) 29 else 28
-            1, 3, 5, 7, 8, 10 -> 31
+            1, 3, 5, 7, 8, 10, 12 -> 31
             else -> 30
         }
         for (i in 1..day) {
@@ -178,7 +219,7 @@ class TransactionsFragment : Fragment() {
     private fun openDialogChoice(
         title: String,
         listData: MutableList<ItemChoice>,
-        onItemChoice: (idChosen: Int) -> Unit
+        onItemChoice: (idChosen: Int) -> Unit,
     ) {
         choiceFragment = ChoiceFragment(
             list_data = listData,

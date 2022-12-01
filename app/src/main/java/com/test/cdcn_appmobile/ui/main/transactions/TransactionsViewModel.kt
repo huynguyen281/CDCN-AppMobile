@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.test.cdcn_appmobile.data.models.Expenditure
 import com.test.cdcn_appmobile.data.repository.ExpenditureRepository
+import com.test.cdcn_appmobile.extension.toDayMonth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -14,7 +15,8 @@ class TransactionsViewModel(private val expenditureRepository: ExpenditureReposi
     ViewModel() {
 
     companion object {
-        private var listExpenditure: MutableLiveData<MutableList<Expenditure>?> = MutableLiveData<MutableList<Expenditure>?>()
+        private var listExpenditure: MutableLiveData<MutableList<Expenditure>?> =
+            MutableLiveData<MutableList<Expenditure>?>()
         private var idDayChosen: MutableLiveData<Int> = MutableLiveData<Int>()
         private var idMonthChosen: MutableLiveData<Int> = MutableLiveData<Int>()
         private var idYearChosen: MutableLiveData<Int> = MutableLiveData<Int>()
@@ -31,13 +33,13 @@ class TransactionsViewModel(private val expenditureRepository: ExpenditureReposi
     fun getListExpenditureFromServer(
         authToken: String,
         idUser: String,
-        onSuccess: (String?) -> Unit
+        onSuccess: (String?) -> Unit,
     ) {
         viewModelScope.launch(Dispatchers.IO) {
             expenditureRepository.getExpenditure(
                 authToken,
                 idUser,
-                "$idDayChosen-$idMonthChosen-$idYearChosen"
+                "${idDayChosen.value?.toString()?.toDayMonth()}-${idMonthChosen.value?.toString()?.toDayMonth()}-${idYearChosen.value}"
             ).collect {
                 listExpenditure.postValue(it.resultObj ?: listExpenditure.value)
                 withContext(Dispatchers.Main) {

@@ -5,13 +5,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.bumptech.glide.Glide
 import com.test.cdcn_appmobile.data.models.Expenditure
 import com.test.cdcn_appmobile.databinding.ItemExpenditureBinding
 import com.test.cdcn_appmobile.extension.toStringNumber
+import com.test.cdcn_appmobile.utils.Constant
 
 class ExpenditureAdapter(
     private val listData: MutableList<Expenditure>,
-    private val onItemClick:(Expenditure) -> Unit
+    private val onItemClick: (Expenditure) -> Unit,
 ) : RecyclerView.Adapter<ExpenditureAdapter.ExpenditureHolder>() {
 
 
@@ -32,8 +34,14 @@ class ExpenditureAdapter(
         @SuppressLint("SetTextI18n")
         internal fun bindView(position: Int) {
             binding.run {
-                tvName.text = listData[position].categoryTypeName
-                tvMoney.text = "${listData[position].cost.toStringNumber()} đ"
+
+                Glide.with(binding.root).load(Constant.baseURL + listData[position].imageIcon)
+                    .fitCenter()
+                    .into(roundedImageView)
+
+                tvName.text = listData[position].categoryName
+                tvMoney.text =
+                    "${if (listData[position].categoryType == 0) "+" else "-"}${listData[position].cost.toStringNumber()} đ"
                 tvMoney.isSelected = listData[position].categoryType == 0
 
                 layoutItem.setOnClickListener {

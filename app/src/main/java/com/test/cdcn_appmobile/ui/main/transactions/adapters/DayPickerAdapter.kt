@@ -12,8 +12,6 @@ class DayPickerAdapter(
     private val onItemClick: (ItemChoice) -> Unit
 ) : RecyclerView.Adapter<DayPickerAdapter.DayPickerHolder>() {
 
-    internal var indexSelected: Int = 0
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayPickerHolder {
         val binding =
             ItemDayPickerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -32,8 +30,8 @@ class DayPickerAdapter(
         internal fun bindView(position: Int) {
             binding.run {
                 tvDay.text = listData[position].name
-                tvDay.isSelected = (indexSelected == position)
-                layoutItem.isSelected = (indexSelected == position)
+                tvDay.isSelected = (listData[position].isCheck)
+                layoutItem.isSelected = (listData[position].isCheck)
 
                 layoutItem.setOnClickListener {
                     onItemClick(listData[position])

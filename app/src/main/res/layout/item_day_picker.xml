@@ -13,7 +13,6 @@
         android:layout_height="0dp"
         android:background="@drawable/bg_item_day_picker"
         android:padding="5dp"
-        android:text="5"
         android:textColor="@color/text_item_choice"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
