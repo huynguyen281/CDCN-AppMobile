@@ -13,9 +13,9 @@ import com.test.cdcn_appmobile.databinding.FragmentLoginBinding
 import com.test.cdcn_appmobile.extension.addTextChangedListener
 import com.test.cdcn_appmobile.extension.replaceFragment
 import com.test.cdcn_appmobile.extension.setVisibility
-import com.test.cdcn_appmobile.ui.main.HomeFragment
 import com.test.cdcn_appmobile.ui.launch.LaunchViewModel
 import com.test.cdcn_appmobile.ui.launch.signup.SignUpFragment
+import com.test.cdcn_appmobile.ui.main.HomeFragment
 import com.test.cdcn_appmobile.utils.Constant
 import com.test.cdcn_appmobile.utils.InjectorUtil
 
@@ -105,14 +105,14 @@ class LoginFragment : Fragment() {
                             layoutPass.setVisibility(true)
                             tvForgotpassOpen.setVisibility(true)
                             if (done) {
-                                requireActivity().replaceFragment(R.id.ctReplaceFragment,
-                                    HomeFragment())
+                                requireActivity().replaceFragment(
+                                    R.id.ctReplaceFragment,
+                                    HomeFragment()
+                                )
                             } else {
-                                Toast.makeText(
-                                    requireContext(),
-                                    message,
-                                    Toast.LENGTH_LONG
-                                ).show()
+                                context?.let {
+                                    Toast.makeText(it, message, Toast.LENGTH_SHORT).show()
+                                }
                             }
                         })
                 }

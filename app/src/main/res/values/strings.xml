@@ -31,6 +31,7 @@
     <string name="limitedSpend">Tình trạng tài chính</string>
     <string name="moneySpent">Tiền đã chi</string>
     <string name="moneyReceived">Tiền đã thu</string>
+    <string name="day">Ngày:</string>
     <string name="month">Tháng:</string>
     <string name="year">Năm:</string>
     <string name="limited">Hạn mức</string>
@@ -44,4 +45,5 @@
     <string name="byMonth">Theo Ngày Trong Tháng</string>
     <string name="byYear">Theo Tháng Trong Năm</string>
     <string name="tokenJWT">bearer %s</string>
+    <string name="unitMoney">đ</string>
 </resources>

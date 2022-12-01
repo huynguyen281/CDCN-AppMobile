@@ -14,7 +14,7 @@ class BudgetViewModel(private val budgetRepository: BudgetRepository) : ViewMode
 
     companion object {
         private var isEditing = MutableLiveData<Boolean>()
-        private var budget: MutableLiveData<Budget> = MutableLiveData<Budget>()
+        private var budget: MutableLiveData<Budget?> = MutableLiveData<Budget?>()
         private var idUnitChosen: MutableLiveData<Int> = MutableLiveData<Int>()
         internal var isNewExpenditure: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
 
@@ -25,20 +25,18 @@ class BudgetViewModel(private val budgetRepository: BudgetRepository) : ViewMode
 
     fun getIsEditing(): LiveData<Boolean> = isEditing
 
-    fun getBudget(): LiveData<Budget> = budget
+    fun getBudget(): LiveData<Budget?> = budget
 
     fun getIdUnitChosen(): LiveData<Int> = idUnitChosen
 
     fun getIsNewExpenditure(): LiveData<Boolean> = isNewExpenditure
 
-    fun getBudgetFromServer(auth: String, idUser: String, onSuccess: (Boolean, String) -> Unit) {
+    fun getBudgetFromServer(auth: String, idUser: String, onSuccess: (String?) -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
             budgetRepository.getBudget(auth, idUser).collect {
-                it.resultObj?.let { result ->
-                    budget.postValue(result)
-                }
+                budget.postValue(it.resultObj ?: budget.value)
                 withContext(Dispatchers.Main) {
-                    onSuccess(it.isSuccessed, it.message ?: "")
+                    onSuccess(it.message)
                 }
             }
         }
@@ -61,9 +59,7 @@ class BudgetViewModel(private val budgetRepository: BudgetRepository) : ViewMode
         viewModelScope.launch(Dispatchers.IO) {
             budgetRepository.updateBudget(authToken, idUser, limitMoney, idUnitChosen.value ?: 1)
                 .collect {
-                    it.resultObj?.let { result ->
-                        budget.postValue(result)
-                    }
+                    budget.postValue(it.resultObj ?: budget.value)
                     withContext(Dispatchers.Main) {
                         onSuccess(it.message ?: "")
                     }
