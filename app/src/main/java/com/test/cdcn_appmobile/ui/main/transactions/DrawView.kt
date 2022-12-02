@@ -50,9 +50,14 @@ class DrawView(
                 listDrawerObject[0].receivedMoney
             else listDrawerObject[0].spendMoney
 
-        while (maxRangeOY < temp) {
-            maxRangeOY += 100
+        if(temp != 0L) {
+            while (maxRangeOY < temp) {
+                maxRangeOY += 100
+            }
+        } else {
+            maxRangeOY = 500
         }
+
         stepRange = maxRangeOY / 10
 
         textTitlePaint.apply {
