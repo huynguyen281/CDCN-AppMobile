@@ -19,7 +19,6 @@ import com.test.cdcn_appmobile.extension.OnItemChoice
 import com.test.cdcn_appmobile.extension.setVisibility
 import com.test.cdcn_appmobile.extension.toStringNumber
 import com.test.cdcn_appmobile.ui.dialog.ChoiceFragment
-import com.test.cdcn_appmobile.ui.main.statistical.DrawView
 import com.test.cdcn_appmobile.ui.main.transactions.adapters.DayPickerAdapter
 import com.test.cdcn_appmobile.ui.main.transactions.adapters.ExpenditureAdapter
 import com.test.cdcn_appmobile.utils.Constant
@@ -76,12 +75,6 @@ class TransactionsFragment : Fragment() {
 
 
         binding?.run {
-            val mutableList: MutableList<DrawerObject> = mutableListOf()
-            mutableList.add(DrawerObject( 500000, 120000, "Hôm nay"))
-
-            val drawView = DrawView(requireContext(), mutableList)
-
-            layoutGraph.addView(drawView)
 
             transactionsViewModel?.run {
 
@@ -116,6 +109,7 @@ class TransactionsFragment : Fragment() {
 
                 getListExpenditure().observe(viewLifecycleOwner) {
                     it?.let {
+                        layoutGraph.removeAllViews()
                         listExpenditure.clear()
                         listExpenditure.addAll(it)
                         expenditureAdapter?.notifyDataSetChanged()
@@ -133,13 +127,21 @@ class TransactionsFragment : Fragment() {
                         tvMoneyLimited.text = "+${allReceiver.toStringNumber()}đ"
                         tvMoneySpent.text = "-${allSpent.toStringNumber()}đ"
                         tvBudget.run {
-                            text = "${if(allReceiver >= allSpent) "+" else ""}${(allReceiver - allSpent).toStringNumber()}đ"
+                            text =
+                                "${if (allReceiver >= allSpent) "+" else ""}${(allReceiver - allSpent).toStringNumber()}đ"
                             isSelected = (allReceiver >= allSpent)
                         }
                         tvTotalDay.run {
-                            text = "${allSpent.toStringNumber()}đ"
+                            text = "${if (allReceiver >= allSpent) "+" else ""}${(allReceiver - allSpent).toStringNumber()}đ"
                             isSelected = (allReceiver >= allSpent)
                         }
+
+                        val mutableList: MutableList<DrawerObject> = mutableListOf()
+                        mutableList.add(DrawerObject(allSpent / 1000, allReceiver / 1000, ""))
+
+                        val drawView = DrawView(requireContext(), mutableList)
+
+                        layoutGraph.addView(drawView)
 
                     }
                 }

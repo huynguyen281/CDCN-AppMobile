@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-//        replaceFragment(R.id.ctReplaceFragment, LoginFragment())
-        replaceFragment(R.id.ctReplaceFragment, HomeFragment())
+        replaceFragment(R.id.ctReplaceFragment, LoginFragment())
+//        replaceFragment(R.id.ctReplaceFragment, HomeFragment())
     }
 }

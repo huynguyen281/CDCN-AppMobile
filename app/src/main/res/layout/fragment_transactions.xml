@@ -160,7 +160,6 @@
                         style="@style/textViewAddMoney"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="+10,000.00 đ"
                         android:textColor="@color/colorMiddleGreenYellow"
                         app:layout_constraintBottom_toTopOf="@+id/tvMoneySpent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -173,7 +172,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="-5,000.00 đ"
                         android:textColor="@color/colorVenetianRed"
                         app:layout_constraintBottom_toTopOf="@+id/textView14"
                         app:layout_constraintEnd_toEndOf="@+id/tvMoneyLimited"
@@ -196,11 +194,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:text="+5,000.00 đ"
                         android:textColor="@color/text_item_expenditure"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/textView14"
                         app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -224,7 +222,6 @@
                     android:layout_height="0dp"
                     android:layout_marginEnd="20dp"
                     android:gravity="center|end"
-                    android:text="+5,000.00"
                     android:textColor="@color/text_item_expenditure"
                     app:layout_constraintBottom_toBottomOf="@+id/rclViewDay"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -255,7 +252,8 @@
                     android:text="@string/day"
                     app:layout_constraintBottom_toBottomOf="@+id/rclViewDay"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/rclViewDay" />
+                    app:layout_constraintTop_toTopOf="@+id/rclViewDay"
+                    tools:ignore="TextContrastCheck" />
 
                 <TextView
                     android:id="@+id/textView18"
@@ -266,21 +264,35 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.501"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btnChoiceMonth" />
+                    app:layout_constraintTop_toBottomOf="@+id/btnChoiceMonth"
+                    tools:ignore="TextContrastCheck" />
 
                 <TextView
-                    style="@style/textViewTitle"
                     android:id="@+id/textView19"
+                    style="@style/textViewTitle"
                     android:text="@string/unitGraph"
                     app:layout_constraintEnd_toEndOf="@+id/textView18"
                     app:layout_constraintStart_toStartOf="@+id/textView18"
-                    app:layout_constraintTop_toBottomOf="@+id/textView18" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView18"
+                    tools:ignore="TextContrastCheck" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnAddExpenditure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
+        app:tint="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_add"
+        tools:ignore="ContentDescription,ImageContrastCheck,SpeakableTextPresentCheck" />
 
     <ImageView
         android:id="@+id/viewBg"
