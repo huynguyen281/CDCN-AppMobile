@@ -46,4 +46,6 @@
     <string name="byYear">Theo Tháng Trong Năm</string>
     <string name="tokenJWT">bearer %s</string>
     <string name="unitMoney">đ</string>
+    <string name="graph">Đồ thị thu chi ngày hôm nay</string>
+    <string name="unitGraph">(Đơn vị: ngàn đồng)</string>
 </resources>
