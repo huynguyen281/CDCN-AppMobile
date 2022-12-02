@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.test.cdcn_appmobile.R
+import com.test.cdcn_appmobile.data.models.DrawerObject
 import com.test.cdcn_appmobile.data.models.Expenditure
 import com.test.cdcn_appmobile.data.models.ItemChoice
 import com.test.cdcn_appmobile.databinding.FragmentTransactionsBinding
@@ -108,6 +109,7 @@ class TransactionsFragment : Fragment() {
 
                 getListExpenditure().observe(viewLifecycleOwner) {
                     it?.let {
+                        layoutGraph.removeAllViews()
                         listExpenditure.clear()
                         listExpenditure.addAll(it)
                         expenditureAdapter?.notifyDataSetChanged()
@@ -122,16 +124,24 @@ class TransactionsFragment : Fragment() {
                             }
                         }
 
-                        tvMoneyLimited.text = "${allReceiver.toStringNumber()}đ"
-                        tvMoneySpent.text = "${allSpent.toStringNumber()}đ"
+                        tvMoneyLimited.text = "+${allReceiver.toStringNumber()}đ"
+                        tvMoneySpent.text = "-${allSpent.toStringNumber()}đ"
                         tvBudget.run {
-                            text = "${(allReceiver - allSpent).toStringNumber()}đ"
+                            text =
+                                "${if (allReceiver >= allSpent) "+" else ""}${(allReceiver - allSpent).toStringNumber()}đ"
                             isSelected = (allReceiver >= allSpent)
                         }
                         tvTotalDay.run {
-                            text = "${allSpent.toStringNumber()}đ"
+                            text = "${if (allReceiver >= allSpent) "+" else ""}${(allReceiver - allSpent).toStringNumber()}đ"
                             isSelected = (allReceiver >= allSpent)
                         }
+
+                        val mutableList: MutableList<DrawerObject> = mutableListOf()
+                        mutableList.add(DrawerObject(allSpent / 1000, allReceiver / 1000, ""))
+
+                        val drawView = DrawView(requireContext(), mutableList)
+
+                        layoutGraph.addView(drawView)
 
                     }
                 }
