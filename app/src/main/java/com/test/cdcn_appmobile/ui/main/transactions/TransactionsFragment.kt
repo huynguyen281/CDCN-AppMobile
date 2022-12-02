@@ -114,6 +114,8 @@ class TransactionsFragment : Fragment() {
                         listExpenditure.addAll(it)
                         expenditureAdapter?.notifyDataSetChanged()
 
+                        tvWarningEmpty.setVisibility(listExpenditure.isEmpty())
+
                         var allReceiver = 0L
                         var allSpent = 0L
                         for (i in listExpenditure) {

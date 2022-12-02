@@ -31,11 +31,11 @@
     <string name="limitedSpend">Tình trạng tài chính</string>
     <string name="moneySpent">Tiền đã chi</string>
     <string name="moneyReceived">Tiền đã thu</string>
-    <string name="day">Ngày:</string>
-    <string name="month">Tháng:</string>
-    <string name="year">Năm:</string>
+    <string name="day">Ngày</string>
+    <string name="month">Tháng</string>
+    <string name="year">Năm</string>
     <string name="limited">Hạn mức</string>
-    <string name="loop">Lặp lại:</string>
+    <string name="loop">Lặp lại</string>
     <string name="daily">Hàng ngày</string>
     <string name="monthly">Hàng tháng</string>
     <string name="yearly">Hàng năm</string>
@@ -48,4 +48,12 @@
     <string name="unitMoney">đ</string>
     <string name="graph">Đồ thị thu chi ngày hôm nay</string>
     <string name="unitGraph">(Đơn vị: ngàn đồng)</string>
+
+<!--    FragmentDetail-->
+    <string name="add">Thêm chi tiêu</string>
+    <string name="update">Cập nhật chi tiêu</string>
+    <string name="emptyList">Bạn chưa có chi tiêu trong ngày này !!!</string>
+    <string name="choiceType">Chọn thể loại chi tiêu !!!</string>
+    <string name="howMuchMoney">Số tiền đã chi tiêu</string>
+    <string name="note">Ghi chú</string>
 </resources>
