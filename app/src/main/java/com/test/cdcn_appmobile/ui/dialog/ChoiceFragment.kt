@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -18,7 +17,7 @@ import com.test.cdcn_appmobile.databinding.FragmentListChoiceBinding
 import java.util.*
 
 class ChoiceFragment(
-    private var list_data: ArrayList<ItemChoice>,
+    private var list_data: MutableList<ItemChoice>,
     private var title: String,
     private var itemListener: (ItemChoice) -> Unit,
     private var onChoiceFragHide: () -> Unit
@@ -92,8 +91,11 @@ class ChoiceFragment(
             ) listSearch.add(i)
         }
         if (listSearch.isEmpty()) {
-            if (text.isNotEmpty()) Toast.makeText(activity, "No Foods Founds", Toast.LENGTH_SHORT)
-                .show()
+            if (text.isNotEmpty())
+                context?.let {
+                    Toast.makeText(it, "Không tìm thấy dữ liệu !!!", Toast.LENGTH_SHORT)
+                        .show()
+                }
         } else {
             adapter?.setListData(listSearch)
         }

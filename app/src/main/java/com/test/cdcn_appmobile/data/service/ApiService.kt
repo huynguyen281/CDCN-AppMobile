@@ -1,6 +1,7 @@
 package com.test.cdcn_appmobile.data.service
 
 import com.test.cdcn_appmobile.data.models.Budget
+import com.test.cdcn_appmobile.data.models.Expenditure
 import com.test.cdcn_appmobile.data.models.ResponseRetrofit
 import com.test.cdcn_appmobile.data.models.User
 import retrofit2.Response
@@ -39,4 +40,15 @@ interface ApiService {
         @Path("id") idUser: String,
         @Body options: Map<String, Long>
     ): Response<ResponseRetrofit<Budget?>>
+
+    @Headers(
+        "Accept: application/json",
+        "Content-Type: application/json; charset=utf-8",
+    )
+    @GET("/api/Expenditure/")
+    suspend fun getExpenditure(
+        @Header("authorization") token: String,
+        @QueryMap options: Map<String, String>
+    ): Response<ResponseRetrofit<ArrayList<Expenditure>?>>
+
 }

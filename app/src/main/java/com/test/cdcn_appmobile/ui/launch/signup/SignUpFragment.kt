@@ -107,11 +107,9 @@ class SignUpFragment() : Fragment() {
                                 Constant.USER.password = edtSignupPw1.text.toString().trim()
                                 activity?.backToPreFragment()
                             } else {
-                                Toast.makeText(
-                                    requireContext(),
-                                    message,
-                                    Toast.LENGTH_LONG
-                                ).show()
+                                context?.let {
+                                    Toast.makeText(it, message, Toast.LENGTH_SHORT).show()
+                                }
                             }
                         }
                     )

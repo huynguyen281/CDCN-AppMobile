@@ -3,8 +3,6 @@ package com.test.cdcn_appmobile.ui.main.budget
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,7 +43,9 @@ class BudgetFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initView()
         initListener()
-        initData()
+        if (budgetViewModel?.getBudget()?.value == null) {
+            initData()
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -59,18 +59,21 @@ class BudgetFragment : Fragment() {
         binding?.run {
 
             budgetViewModel?.run {
-                getBudget().observe(viewLifecycleOwner) {
+                getBudget().observe(viewLifecycleOwner) { budget ->
+                    budget?.let {
 
-                    edtLimited.text =
-                        Editable.Factory.getInstance().newEditable(it.limitedMoney.toString())
+                        edtLimited.text =
+                            Editable.Factory.getInstance()
+                                .newEditable(it.limitedMoney.toStringNumber())
 
-                    setIdUnitChosen(it.unitTime)
+                        setIdUnitChosen(it.unitTime)
 
-                    tvMoneyLimited.text = "${it.limitedMoney.toStringNumber()} đ"
-                    tvMoneySpent.text = "- ${it.spendMoney.toStringNumber()} đ"
-                    tvBudget.run {
-                        text = "${it.remainMoney.toStringNumber()} đ"
-                        isSelected = it.remainMoney >= 0
+                        tvMoneyLimited.text = "${it.limitedMoney.toStringNumber()} đ"
+                        tvMoneySpent.text = "- ${it.spendMoney.toStringNumber()} đ"
+                        tvBudget.run {
+                            text = "${it.remainMoney.toStringNumber()} đ"
+                            isSelected = it.remainMoney >= 0
+                        }
                     }
                 }
 
@@ -116,12 +119,15 @@ class BudgetFragment : Fragment() {
                             R.string.tokenJWT,
                             Constant.USER.tokenJWT
                         ), Constant.USER.id
-                    ) { isSuccess, message ->
-                        Log.e("TTT", "initData: $message")
+                    ) { message ->
+                        refreshLayout.isEnabled = true
+                        refreshLayout.isRefreshing = false
                         viewBg.setVisibility(false)
                         progressBar.setVisibility(false)
-                        if (!isSuccess) {
-                            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                        message?.let {
+                            context?.let {
+                                Toast.makeText(it, message, Toast.LENGTH_SHORT).show()
+                            }
                         }
                     }
                 }
@@ -132,21 +138,39 @@ class BudgetFragment : Fragment() {
 
     private fun initListener() {
         binding?.run {
+
             btnEnableEdit.setOnClickListener {
                 budgetViewModel?.run {
                     if (getIsEditing().value == true) {
-                        viewBg.setVisibility(true)
-                        progressBar.setVisibility(true)
-                        updateBudget(
-                            resources.getString(
-                                R.string.tokenJWT,
-                                Constant.USER.tokenJWT
-                            ), Constant.USER.id, edtLimited.text.toString()
-                        ) { message ->
-                            viewBg.setVisibility(false)
-                            progressBar.setVisibility(false)
-                            Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
+                        if (edtLimited.text.toString().trim().isNotEmpty()) {
+                            viewBg.setVisibility(true)
+                            progressBar.setVisibility(true)
+                            updateBudget(
+                                resources.getString(
+                                    R.string.tokenJWT,
+                                    Constant.USER.tokenJWT
+                                ), Constant.USER.id, edtLimited.text.toString().trim()
+                            ) { message ->
+                                viewBg.setVisibility(false)
+                                progressBar.setVisibility(false)
+                                context?.let {
+                                    Toast.makeText(it, message, Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        } else {
+                            context?.let {
+                                Toast.makeText(
+                                    it,
+                                    "Vui lòng nhập hạn mức trước khi cập nhật !!!",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                            return@setOnClickListener
                         }
+                    } else {
+                        edtLimited.text =
+                            Editable.Factory.getInstance()
+                                .newEditable(edtLimited.text.toString().replace(",", ""))
                     }
                     changeEditing()
                 }
@@ -160,33 +184,15 @@ class BudgetFragment : Fragment() {
                 openDialogChoice()
             }
 
-            edtLimited.addTextChangedListener(object : TextWatcher {
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int,
-                ) {
-
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-                }
-
-                override fun afterTextChanged(s: Editable?) {
-                    edtLimited.text =
-                        Editable.Factory.getInstance()
-                            .newEditable(s.toString().toLong().toStringNumber())
-
-                }
-
-            })
+            refreshLayout.setOnRefreshListener {
+                initData()
+            }
         }
     }
 
     private fun initData() {
         binding?.run {
+            refreshLayout.isEnabled = false
             viewBg.setVisibility(true)
             progressBar.setVisibility(true)
             budgetViewModel?.getBudgetFromServer(
@@ -194,11 +200,15 @@ class BudgetFragment : Fragment() {
                     R.string.tokenJWT,
                     Constant.USER.tokenJWT
                 ), Constant.USER.id
-            ) { isSuccess, message ->
+            ) { message ->
+                refreshLayout.isEnabled = true
+                refreshLayout.isRefreshing = false
                 viewBg.setVisibility(false)
                 progressBar.setVisibility(false)
-                if (!isSuccess) {
-                    Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+                message?.let {
+                    context?.let {
+                        Toast.makeText(it, message, Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         }

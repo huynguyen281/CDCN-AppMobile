@@ -1,18 +1,19 @@
 package com.test.cdcn_appmobile.ui.dialog
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.test.cdcn_appmobile.data.models.ItemChoice
 import com.test.cdcn_appmobile.databinding.FeatureListItemBinding
 
 internal class ListChoiceItemAdapter(
-    private var list_data: ArrayList<ItemChoice>,
+    private var list_data: MutableList<ItemChoice>,
     private val itemChoiceListener: (item: ItemChoice) -> Unit
 ) : RecyclerView.Adapter<ListChoiceItemAdapter.ListChoiceHolder?>() {
 
-    fun setListData(list_data: ArrayList<ItemChoice>) {
+    @SuppressLint("NotifyDataSetChanged")
+    fun setListData(list_data: MutableList<ItemChoice>) {
         this.list_data = list_data
         notifyDataSetChanged()
     }
@@ -41,11 +42,11 @@ internal class ListChoiceItemAdapter(
                     itemChoiceListener(list_data[position])
                     cbItem.isChecked = list_data[position].isCheck
                 }
-                cbItem.setOnClickListener(View.OnClickListener {
+                cbItem.setOnClickListener {
                     itemChoiceListener(
                         list_data[position]
                     )
-                })
+                }
             }
         }
     }
