@@ -41,7 +41,7 @@
     <string name="yearly">Hàng năm</string>
     <string name="budget">Ngân sách còn lại</string>
 
-<!--    FragmentStatistical-->
+    <!--    FragmentStatistical-->
     <string name="byMonth">Theo Ngày Trong Tháng</string>
     <string name="byYear">Theo Tháng Trong Năm</string>
     <string name="tokenJWT">bearer %s</string>
@@ -49,11 +49,20 @@
     <string name="graph">Đồ thị thu chi ngày hôm nay</string>
     <string name="unitGraph">(Đơn vị: ngàn đồng)</string>
 
-<!--    FragmentDetail-->
+    <!--    FragmentDetail-->
     <string name="add">Thêm chi tiêu</string>
     <string name="update">Cập nhật chi tiêu</string>
     <string name="emptyList">Bạn chưa có chi tiêu trong ngày này !!!</string>
     <string name="choiceType">Chọn thể loại chi tiêu !!!</string>
     <string name="howMuchMoney">Số tiền đã chi tiêu</string>
     <string name="note">Ghi chú</string>
+
+    <!-- FragmentEditProfile-->
+    <string name="name">Họ và tên</string>
+    <string name="email">Email</string>
+    <string name="username">Username</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
