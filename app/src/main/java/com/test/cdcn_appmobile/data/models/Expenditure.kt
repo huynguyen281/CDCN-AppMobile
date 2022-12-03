@@ -4,12 +4,12 @@ import com.google.gson.annotations.SerializedName
 
 data class Expenditure(
     @SerializedName("id") val id: String,
-    @SerializedName("cost") val cost: Long,
-    @SerializedName("date") val date: String,
+    @SerializedName("cost") var cost: Long,
+    @SerializedName("date") var date: String,
     @SerializedName("imageIcon") val imageIcon: String,
-    @SerializedName("categoryName") val categoryName: String,
-    @SerializedName("categoryId") val categoryId: String,
-    @SerializedName("categoryType") val categoryType: Int,
-    @SerializedName("categoryTypeName") val categoryTypeName: String,
-    @SerializedName("note") val note: String
+    @SerializedName("categoryName") var categoryName: String,
+    @SerializedName("categoryId") var categoryId: String,
+    @SerializedName("categoryType") var categoryType: Int,
+    @SerializedName("categoryTypeName") var categoryTypeName: String,
+    @SerializedName("note") var note: String
 )

@@ -3,7 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:background="@color/white">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -25,7 +29,6 @@
             android:autoSizeStepGranularity="1sp"
             android:autoSizeTextType="uniform"
             android:background="@color/white"
-            android:enabled="false"
             android:hint="@string/howMuchMoney"
             android:importantForAutofill="no"
             android:inputType="number|text"
@@ -40,10 +43,9 @@
     <TextView
         android:id="@+id/textView23"
         style="@style/TextTitle"
-        android:layout_marginEnd="20dp"
         android:text="@string/unitMoney"
         app:layout_constraintBottom_toBottomOf="@+id/textInputLayout"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnEditCost"
         app:layout_constraintTop_toTopOf="@+id/textInputLayout"
         tools:ignore="TextContrastCheck" />
 
@@ -89,14 +91,11 @@
         android:background="@drawable/bg_edt_profile"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup">
 
         <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/roundedImageView"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="false"
-            android:padding="5dp"
+            android:id="@+id/imgCategory"
+            style="@style/imageViewShow"
             android:src="@drawable/login"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -113,7 +112,7 @@
             android:text="@string/choiceType"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageView3"
-            app:layout_constraintStart_toEndOf="@+id/roundedImageView"
+            app:layout_constraintStart_toEndOf="@+id/imgCategory"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="TextContrastCheck" />
 
@@ -170,7 +169,8 @@
         android:layout_marginTop="20dp"
         android:text="@string/day"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtNote" />
+        app:layout_constraintTop_toBottomOf="@+id/edtNote"
+        tools:ignore="TextContrastCheck" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/btnChoiceDay"
@@ -187,14 +187,13 @@
         <ImageView
             android:id="@+id/roundedImageView2"
             style="@style/imageViewShow"
-            android:padding="10dp"
             android:src="@drawable/ic_calendar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:riv_corner_radius="100dp"
             app:tint = "@color/primaryColor"
-            tools:ignore="ImageContrastCheck" />
+            tools:ignore="ContentDescription,ImageContrastCheck" />
 
         <TextView
             android:id="@+id/tvDayChoice"
@@ -240,5 +239,95 @@
         app:layout_constraintTop_toBottomOf="@+id/btnChoiceDay"
         app:layout_constraintVertical_bias="1.0"
         tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
+
+    <ImageView
+        android:id="@+id/btnDel"
+        style="@style/imageViewShow"
+        app:layout_constraintBottom_toTopOf="@+id/tvCountCost2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_delete"
+        tools:ignore="ContentDescription,ImageContrastCheck" />
+
+    <ImageView
+        android:id="@+id/btnBack"
+        style="@style/imageViewShow"
+        app:layout_constraintBottom_toTopOf="@+id/tvCountCost2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back"
+        tools:ignore="ContentDescription,ImageContrastCheck" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:paddingHorizontal="20dp"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView7">
+
+        <RadioButton
+            android:id="@+id/radioReceiver"
+            style="@style/TextTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="@color/primaryColor"
+            android:text="@string/moneyReceived"
+            android:textStyle="normal"
+            tools:ignore="TextContrastCheck" />
+
+        <RadioButton
+            android:id="@+id/radioSpent"
+            style="@style/TextTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="@color/primaryColor"
+            android:text="@string/moneySpent"
+            android:textStyle="normal"
+            tools:ignore="TextContrastCheck" />
+    </RadioGroup>
+
+    <ImageView
+        android:id="@+id/btnEditCost"
+        style="@style/imageViewShow"
+        android:src="@drawable/ic_edt_budget"
+        app:layout_constraintBottom_toBottomOf="@+id/textView23"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView23"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/viewBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

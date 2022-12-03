@@ -3,6 +3,7 @@ package com.test.cdcn_appmobile.ui.main.budget
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -78,6 +79,7 @@ class BudgetFragment : Fragment() {
                 }
 
                 getIsEditing().observe(viewLifecycleOwner) {
+                    edtLimited.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(if (it) 11 else 14))
                     btnEnableEdit.isSelected = it
                     edtLimited.isEnabled = it
                     tvLoopUnit.isEnabled = it

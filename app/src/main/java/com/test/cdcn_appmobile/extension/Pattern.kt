@@ -10,9 +10,6 @@ internal val PASSWORD: Regex by lazy { "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\$
 
 @SuppressLint("SimpleDateFormat")
 fun getDay(): String {
-    val sdf = SimpleDateFormat("HH:mm · MM/dd/yy · ")
+    val sdf = SimpleDateFormat("dd-MM-yyyy")
     return sdf.format(Date())
 }
-
-@SuppressLint("SimpleDateFormat")
-val patternTime = SimpleDateFormat("mm:ss")
