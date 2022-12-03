@@ -1,9 +1,6 @@
 package com.test.cdcn_appmobile.data.service
 
-import com.test.cdcn_appmobile.data.models.Budget
-import com.test.cdcn_appmobile.data.models.Expenditure
-import com.test.cdcn_appmobile.data.models.ResponseRetrofit
-import com.test.cdcn_appmobile.data.models.User
+import com.test.cdcn_appmobile.data.models.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -50,5 +47,46 @@ interface ApiService {
         @Header("authorization") token: String,
         @QueryMap options: Map<String, String>
     ): Response<ResponseRetrofit<ArrayList<Expenditure>?>>
+
+    @Headers(
+        "Accept: application/json",
+        "Content-Type: application/json; charset=utf-8",
+    )
+    @GET("/api/Category/get-cate-{type}")
+    suspend fun getCategory(
+        @Header("authorization") token: String,
+        @Path("type") idType: Int
+    ): Response<ResponseRetrofit<ArrayList<Category>?>>
+
+    @Headers(
+        "Accept: application/json",
+        "Content-Type: application/json; charset=utf-8",
+    )
+    @POST("/api/Expenditure")
+    suspend fun addExpenditure(
+        @Header("authorization") token: String,
+        @Body options: Map<String, String>
+    ): Response<ResponseRetrofit<Any?>>
+
+    @Headers(
+        "Accept: application/json",
+        "Content-Type: application/json; charset=utf-8",
+    )
+    @PUT("/api/Expenditure/{id}")
+    suspend fun updateExpenditure(
+        @Header("authorization") token: String,
+        @Path("id") idExpenditure: String,
+        @Body options: Map<String, String>
+    ): Response<ResponseRetrofit<Any?>>
+
+    @Headers(
+        "Accept: application/json",
+        "Content-Type: application/json; charset=utf-8",
+    )
+    @DELETE("/api/Expenditure/{id}")
+    suspend fun deleteExpenditure(
+        @Header("authorization") token: String,
+        @Path("id") idExpenditure: String
+    ): Response<ResponseRetrofit<Any?>>
 
 }

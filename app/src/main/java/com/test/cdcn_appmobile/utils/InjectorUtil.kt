@@ -6,6 +6,7 @@ import com.test.cdcn_appmobile.data.repository.UserRepository
 import com.test.cdcn_appmobile.ui.launch.LaunchViewModelFactory
 import com.test.cdcn_appmobile.ui.main.budget.BudgetViewModelFactory
 import com.test.cdcn_appmobile.ui.main.transactions.TransactionsViewModelFactory
+import com.test.cdcn_appmobile.ui.main.transactions.detail.ExDetailViewModelFactory
 
 /*
  * Created by tuyen.dang on 10/10/2022
@@ -23,5 +24,9 @@ object InjectorUtil {
 
     fun transactionsViewModelFactory(): TransactionsViewModelFactory {
         return TransactionsViewModelFactory(ExpenditureRepository)
+    }
+
+    fun exDetailViewModelFactory(): ExDetailViewModelFactory {
+        return ExDetailViewModelFactory(ExpenditureRepository)
     }
 }

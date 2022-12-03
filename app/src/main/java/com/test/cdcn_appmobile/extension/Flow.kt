@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.flow
 import retrofit2.Response
 
 internal fun <T> flowWithCatch(
-    res: Response<ResponseRetrofit<T?>>
+    res: Response<ResponseRetrofit<T?>>,
 ): Flow<ResponseRetrofit<out T?>> {
     return flow {
         when (res.code()) {
@@ -28,6 +28,14 @@ internal fun <T> flowWithCatch(
             }
         }
     }.catch {
+        emit(ResponseRetrofit(false, "Lỗi khi thực hiện thao tác !!!", null))
+    }
+}
+
+internal fun <T> errorTimeoutFlow(): Flow<ResponseRetrofit<out T?>> {
+    return flow {
         emit(ResponseRetrofit(false, "Lỗi Khi thực hiện thao tác !!!", null))
+    }.catch {
+        emit(ResponseRetrofit(false, "Lỗi server không phản hồi !!!", null))
     }
 }
