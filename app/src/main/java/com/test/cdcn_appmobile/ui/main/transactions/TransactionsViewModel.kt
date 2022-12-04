@@ -15,11 +15,11 @@ class TransactionsViewModel(private val expenditureRepository: ExpenditureReposi
     ViewModel() {
 
     companion object {
-        private var listExpenditure: MutableLiveData<MutableList<Expenditure>?> =
+        private val listExpenditure: MutableLiveData<MutableList<Expenditure>?> =
             MutableLiveData<MutableList<Expenditure>?>()
-        private var idDayChosen: MutableLiveData<Int> = MutableLiveData<Int>()
-        private var idMonthChosen: MutableLiveData<Int> = MutableLiveData<Int>()
-        private var idYearChosen: MutableLiveData<Int> = MutableLiveData<Int>()
+        private val idDayChosen: MutableLiveData<Int> = MutableLiveData<Int>()
+        private val idMonthChosen: MutableLiveData<Int> = MutableLiveData<Int>()
+        private val idYearChosen: MutableLiveData<Int> = MutableLiveData<Int>()
 
         internal fun clearDay() {
             idDayChosen.value = -1
@@ -45,7 +45,9 @@ class TransactionsViewModel(private val expenditureRepository: ExpenditureReposi
             expenditureRepository.getExpenditure(
                 authToken,
                 idUser,
-                "${idDayChosen.value?.toString()?.toDayMonth()}-${idMonthChosen.value?.toString()?.toDayMonth()}-${idYearChosen.value}"
+                "${idDayChosen.value?.toString()?.toDayMonth()}-${
+                    idMonthChosen.value?.toString()?.toDayMonth()
+                }-${idYearChosen.value}"
             ).collect {
                 listExpenditure.postValue(it.resultObj ?: listExpenditure.value)
                 withContext(Dispatchers.Main) {

@@ -13,10 +13,10 @@ import kotlinx.coroutines.withContext
 class BudgetViewModel(private val budgetRepository: BudgetRepository) : ViewModel() {
 
     companion object {
-        private var isEditing = MutableLiveData<Boolean>()
-        private var budget: MutableLiveData<Budget?> = MutableLiveData<Budget?>()
-        private var idUnitChosen: MutableLiveData<Int> = MutableLiveData<Int>()
-        internal var isNewExpenditure: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
+        private val isEditing = MutableLiveData<Boolean>()
+        private val budget: MutableLiveData<Budget?> = MutableLiveData<Budget?>()
+        private val idUnitChosen: MutableLiveData<Int> = MutableLiveData<Int>()
+        internal val isNewExpenditure: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
 
         fun changeNewExpenditure() {
             isNewExpenditure.value = !(isNewExpenditure.value ?: false)

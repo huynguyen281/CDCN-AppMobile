@@ -110,4 +110,25 @@ interface ApiService {
         @Path("id") idUser: String,
         @Body options: Map<String, String>
     ): Response<ResponseRetrofit<Any?>>
+
+    @Headers(
+        "Accept: application/json",
+        "Content-Type: application/json; charset=utf-8",
+    )
+    @GET("/api/Statistic/year")
+    suspend fun getDrawObjectByYear(
+        @Header("authorization") token: String,
+        @QueryMap options: Map<String, String>
+    ): Response<ResponseRetrofit<ArrayList<DrawerObject>?>>
+
+
+    @Headers(
+        "Accept: application/json",
+        "Content-Type: application/json; charset=utf-8",
+    )
+    @GET("/api/Statistic/month")
+    suspend fun getDrawObjectByMonth(
+        @Header("authorization") token: String,
+        @QueryMap options: Map<String, String>
+    ): Response<ResponseRetrofit<ArrayList<DrawerObject>?>>
 }

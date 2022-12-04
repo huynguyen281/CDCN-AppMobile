@@ -4,6 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 data class DrawerObject(
     @SerializedName("spendMoney") val spendMoney: Long,
-    @SerializedName("receivedMoney") val receivedMoney: Long,
+    @SerializedName("receiveMoney") val receivedMoney: Long,
     @SerializedName("time") val time: String
 )

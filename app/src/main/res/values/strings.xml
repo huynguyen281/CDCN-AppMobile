@@ -70,4 +70,6 @@
     <string name="areYouNew">Chưa tài khoản?</string>
     <string name="register">Đăng ký</string>
     <string name="passNotCorrect">Mật khẩu không đúng !!!</string>
+    <string name="starDay">Ngày bắt đầu</string>
+    <string name="endDay">Ngày kết thúc</string>
 </resources>
