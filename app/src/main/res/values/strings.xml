@@ -1,17 +1,5 @@
 <resources>
     <string name="app_name">CDCN-AppMobile</string>
-
-    <!--    FragmentLogin-->
-    <string name="LoginTvWelcome">Welcome</string>
-    <string name="LoginTvNotification">Please Log into your existing  account</string>
-    <string name="LoginYourMail">Your Email</string>
-    <string name="LoginYourPass">Your Password</string>
-    <string name="LoginBtnLogin">Login</string>
-    <string name="LoginBtnSignUp">Sign up?</string>
-    <string name="LoginForgotPass">Forgot your password?</string>
-    <string name="LoginLoginSuccess">Login Success</string>
-    <string name="LoginLoginFail">Login Fail, Wrong Email or Password</string>
-
     <!--    FragmentSignUp-->
     <string name="SignUpTvInfo">Please input information</string>
     <string name="SignUpBtnSignUp">Sign Up</string>
@@ -63,6 +51,23 @@
     <string name="username">Username</string>
 
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="updateProfile">Cập nhật thông tin</string>
+    <string name="confirm">Xác Nhận</string>
+    <string name="passNotMatch">Mật khẩu không trùng khớp</string>
+    <string name="confirmPass">Xác nhận mật khẩu</string>
+    <string name="passCondition">Mật khẩu phải bao gồm chữ hoa, chữ thường và ký tự đặc biệt</string>
+    <string name="newPass">Mật khẩu mới</string>
+    <string name="oldPass">Mật khẩu cũ</string>
+    <string name="changePass">Thay đổi mật khẩu</string>
+    <string name="privateInfo">Thông tin cá nhân</string>
+    <string name="logout">Đăng xuất</string>
+    <string name="aboutUs">Về chúng tôi</string>
+    <string name="tempOfService">Điều khoản và điều kiện</string>
+    <string name="login">Đăng nhập</string>
+    <string name="pass">Mật khẩu</string>
+    <string name="forgotPass">Quên mật khẩu?</string>
+    <string name="areYouNew">Chưa tài khoản?</string>
+    <string name="register">Đăng ký</string>
+    <string name="passNotCorrect">Mật khẩu không đúng !!!</string>
 </resources>

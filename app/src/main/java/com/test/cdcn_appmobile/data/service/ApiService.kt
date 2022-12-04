@@ -89,4 +89,25 @@ interface ApiService {
         @Path("id") idExpenditure: String
     ): Response<ResponseRetrofit<Any?>>
 
+    @Headers(
+        "Accept: application/json",
+        "Content-Type: application/json; charset=utf-8",
+    )
+    @PUT("/api/Account/{id}")
+    suspend fun updateUser(
+        @Header("authorization") token: String,
+        @Path("id") idUser: String,
+        @Body options: Map<String, String>
+    ): Response<ResponseRetrofit<User?>>
+
+    @Headers(
+        "Accept: application/json",
+        "Content-Type: application/json; charset=utf-8",
+    )
+    @PUT("/api/Account/change-password/{id}")
+    suspend fun updatePass(
+        @Header("authorization") token: String,
+        @Path("id") idUser: String,
+        @Body options: Map<String, String>
+    ): Response<ResponseRetrofit<Any?>>
 }

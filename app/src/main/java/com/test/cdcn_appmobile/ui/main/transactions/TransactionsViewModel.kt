@@ -20,6 +20,12 @@ class TransactionsViewModel(private val expenditureRepository: ExpenditureReposi
         private var idDayChosen: MutableLiveData<Int> = MutableLiveData<Int>()
         private var idMonthChosen: MutableLiveData<Int> = MutableLiveData<Int>()
         private var idYearChosen: MutableLiveData<Int> = MutableLiveData<Int>()
+
+        internal fun clearDay() {
+            idDayChosen.value = -1
+            idMonthChosen.value = -1
+            idYearChosen.value = -1
+        }
     }
 
     fun getListExpenditure(): LiveData<MutableList<Expenditure>?> = listExpenditure

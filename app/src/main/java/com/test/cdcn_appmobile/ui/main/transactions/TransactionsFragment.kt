@@ -152,13 +152,13 @@ class TransactionsFragment : Fragment() {
                     }
                 }
 
-                if (getIdYearChosen().value == null) {
+                if (getIdYearChosen().value == null || getIdYearChosen().value == -1) {
                     setIdYearChosen(Calendar.getInstance().get(Calendar.YEAR))
                 }
-                if (getIdMonthChosen().value == null) {
+                if (getIdMonthChosen().value == null || getIdMonthChosen().value == -1) {
                     setIdMonthChosen(Calendar.getInstance().get(Calendar.MONTH) + 1)
                 }
-                if (getIdDayChosen().value == null) {
+                if (getIdDayChosen().value == null || getIdDayChosen().value == -1) {
                     setIdDayChosen(Calendar.getInstance().get(Calendar.DATE))
                 }
             }
@@ -256,6 +256,7 @@ class TransactionsFragment : Fragment() {
                 i == transactionsViewModel?.getIdDayChosen()?.value))
         }
         transactionsViewModel?.setIdDayChosen(transactionsViewModel?.getIdDayChosen()?.value ?: 0)
+        binding?.rclViewDay?.scrollToPosition((transactionsViewModel?.getIdDayChosen()?.value ?: 1) - 1)
         dayPickerAdapter?.notifyDataSetChanged()
     }
 

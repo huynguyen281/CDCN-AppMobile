@@ -42,4 +42,30 @@ object UserRepository {
             errorTimeoutFlow()
         }
     }
+
+    suspend fun updateUser(
+        authToken: String,
+        idUser: String,
+        options: Map<String, String>,
+    ): Flow<ResponseRetrofit<out User?>> {
+        return try {
+            val res = Constant.getRetrofit().updateUser(authToken, idUser, options)
+            flowWithCatch(res)
+        } catch (e: Exception) {
+            errorTimeoutFlow()
+        }
+    }
+
+    suspend fun updatePass(
+        authToken: String,
+        idUser: String,
+        options: Map<String, String>
+    ): Flow<ResponseRetrofit<out Any?>> {
+        return try {
+            val res = Constant.getRetrofit().updatePass(authToken, idUser, options)
+            flowWithCatch(res)
+        } catch (e: Exception) {
+            errorTimeoutFlow()
+        }
+    }
 }
