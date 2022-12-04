@@ -13,5 +13,5 @@ data class User(
     @SerializedName("userName") val userName: String,
     @SerializedName("email") var email: String,
     @SerializedName("password") var password: String,
-    @SerializedName("token") val tokenJWT: String,
+    @SerializedName("token") var tokenJWT: String,
 )
