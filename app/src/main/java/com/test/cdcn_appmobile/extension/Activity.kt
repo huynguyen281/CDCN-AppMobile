@@ -64,10 +64,10 @@ internal fun FragmentActivity.popAllFragment() {
 }
 
 internal fun FragmentActivity.showDialogFrag(
-    title: String,
-    content: String,
-    confirm: String,
-    negative: String,
+    title: String = "",
+    content: String = "",
+    confirm: String = "",
+    negative: String = "",
     negative_callback: () -> Unit,
 ) {
     val dialog = Dialog(this)
@@ -94,14 +94,14 @@ internal fun FragmentActivity.showDialogFrag(
     val btnCancelDialog: Button = dialog.findViewById(R.id.btnCancelDialog)
     val btnChangeDialog: Button = dialog.findViewById(R.id.btnChangeDialog)
 
-    txtTitle.text = title
-    txtContentDialog.text = content
-    btnCancelDialog.text = negative
+    if(title != "") txtTitle.text = title
+    if(content != "") txtContentDialog.text = content
+    if(negative != "") btnCancelDialog.text = negative
     btnCancelDialog.setOnClickListener {
         dialog.dismiss()
     }
 
-    btnChangeDialog.text = confirm
+    if(confirm != "") btnChangeDialog.text = confirm
     btnChangeDialog.setOnClickListener {
         negative_callback()
         dialog.dismiss()

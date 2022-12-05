@@ -63,6 +63,9 @@ class BudgetFragment : Fragment() {
                 getBudget().observe(viewLifecycleOwner) { budget ->
                     budget?.let {
 
+                        tvWarningBudget.setVisibility(it.remainMoney < 0)
+                        imgWarningBudget.setVisibility(it.remainMoney < 0)
+
                         edtLimited.text =
                             Editable.Factory.getInstance()
                                 .newEditable(it.limitedMoney.toStringNumber())
