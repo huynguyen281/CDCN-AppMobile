@@ -6,7 +6,7 @@
     <string name="SignUpMoveToLogin">Move to login</string>
     <string name="SignUpCongratulations">Congratulations</string>
     <string name="SignUpRegisterDone">You have successfully registered!!!</string>
-    <string name="SignUpCancel">Cancel</string>
+    <string name="Cancel">Hủy</string>
     <string name="SignUpExistsEmail">Existed Email %s</string>
 
     <!--    FragmentDialog-->
@@ -73,4 +73,7 @@
     <string name="starDay">Ngày bắt đầu</string>
     <string name="endDay">Ngày kết thúc</string>
     <string name="unit">Đơn vị: </string>
+    <string name="warningAdd">Bạn sắp vượt quá mức chi tiêu bạn đề ra? Bạn có chắc muốn thêm chi tiêu này?</string>
+    <string name="alwayAdd">Vẫn thêm</string>
+    <string name="WarningBudget">Bạn đã chi tiêu vượt ngân sách rồi !!!</string>
 </resources>

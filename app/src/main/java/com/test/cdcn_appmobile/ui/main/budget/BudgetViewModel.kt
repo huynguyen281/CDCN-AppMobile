@@ -14,7 +14,7 @@ class BudgetViewModel(private val budgetRepository: BudgetRepository) : ViewMode
 
     companion object {
         private val isEditing = MutableLiveData<Boolean>()
-        private val budget: MutableLiveData<Budget?> = MutableLiveData<Budget?>()
+        internal val budget: MutableLiveData<Budget?> = MutableLiveData<Budget?>()
         private val idUnitChosen: MutableLiveData<Int> = MutableLiveData<Int>()
         internal val isNewExpenditure: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
 

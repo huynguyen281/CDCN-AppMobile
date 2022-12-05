@@ -16,10 +16,7 @@ import com.bumptech.glide.Glide
 import com.test.cdcn_appmobile.R
 import com.test.cdcn_appmobile.data.models.Expenditure
 import com.test.cdcn_appmobile.databinding.FragmentDetailExpenditureBinding
-import com.test.cdcn_appmobile.extension.backToPreFragment
-import com.test.cdcn_appmobile.extension.getDay
-import com.test.cdcn_appmobile.extension.setVisibility
-import com.test.cdcn_appmobile.extension.toStringNumber
+import com.test.cdcn_appmobile.extension.*
 import com.test.cdcn_appmobile.ui.dialog.ChoiceCategoryFragment
 import com.test.cdcn_appmobile.ui.dialog.DatePickerFragment
 import com.test.cdcn_appmobile.ui.main.budget.BudgetViewModel
@@ -219,26 +216,55 @@ class ExpenditureDetailFragment(
                         && edtCost.text.toString()
                             .replace(",", "").toLong() > 0
                     ) {
-
-                        viewBg.setVisibility(true)
-                        progressBar.setVisibility(true)
-                        addOrUpdateExpenditure(
-                            resources.getString(
-                                R.string.tokenJWT,
-                                Constant.USER.tokenJWT
-                            ),
-                            Constant.USER.id,
-                            expenditure
-                        ) { done, message ->
-                            BudgetViewModel.changeNewExpenditure()
-                            viewBg.setVisibility(false)
-                            progressBar.setVisibility(false)
-                            context?.let {
-                                Toast.makeText(it, message, Toast.LENGTH_SHORT).show()
+                        if (getCategoryType().value == 1
+                            && (BudgetViewModel.budget.value?.remainMoney
+                                ?: Long.MAX_VALUE) < expenditure.cost
+                        ) {
+                            requireActivity().showDialogFrag {
+                                viewBg.setVisibility(true)
+                                progressBar.setVisibility(true)
+                                addOrUpdateExpenditure(
+                                    resources.getString(
+                                        R.string.tokenJWT,
+                                        Constant.USER.tokenJWT
+                                    ),
+                                    Constant.USER.id,
+                                    expenditure
+                                ) { done, message ->
+                                    BudgetViewModel.changeNewExpenditure()
+                                    viewBg.setVisibility(false)
+                                    progressBar.setVisibility(false)
+                                    context?.let {
+                                        Toast.makeText(it, message, Toast.LENGTH_SHORT).show()
+                                    }
+                                    if (done) {
+                                        val time = tvDayChoice.text.toString().split("-")
+                                        onSuccess(time[0].toInt(), time[1].toInt(), time[2].toInt())
+                                    }
+                                }
                             }
-                            if (done) {
-                                val time = tvDayChoice.text.toString().split("-")
-                                onSuccess(time[0].toInt(), time[1].toInt(), time[2].toInt())
+                        } else {
+
+                            viewBg.setVisibility(true)
+                            progressBar.setVisibility(true)
+                            addOrUpdateExpenditure(
+                                resources.getString(
+                                    R.string.tokenJWT,
+                                    Constant.USER.tokenJWT
+                                ),
+                                Constant.USER.id,
+                                expenditure
+                            ) { done, message ->
+                                BudgetViewModel.changeNewExpenditure()
+                                viewBg.setVisibility(false)
+                                progressBar.setVisibility(false)
+                                context?.let {
+                                    Toast.makeText(it, message, Toast.LENGTH_SHORT).show()
+                                }
+                                if (done) {
+                                    val time = tvDayChoice.text.toString().split("-")
+                                    onSuccess(time[0].toInt(), time[1].toInt(), time[2].toInt())
+                                }
                             }
                         }
 

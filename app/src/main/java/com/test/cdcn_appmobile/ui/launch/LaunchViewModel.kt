@@ -43,10 +43,10 @@ class LaunchViewModel(private val userRepository: UserRepository) : ViewModel() 
     }
 
     fun register(users: User, onResult: (Boolean, String) -> Unit) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val res = userRepository.register(users.email, users.password, users.name)
             res.collect {
-                withContext(Dispatchers.IO) {
+                withContext(Dispatchers.Main) {
                     onResult(it.isSuccessed, it.message ?: "")
                 }
             }

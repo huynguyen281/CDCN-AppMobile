@@ -40,6 +40,11 @@ class HomeFragment : Fragment() {
     private fun initView() {
         requireActivity().replaceFragment(
             R.id.ctFragmentUser,
+            BudgetFragment()
+        )
+
+        requireActivity().replaceFragment(
+            R.id.ctFragmentUser,
             TransactionsFragment()
         )
 
