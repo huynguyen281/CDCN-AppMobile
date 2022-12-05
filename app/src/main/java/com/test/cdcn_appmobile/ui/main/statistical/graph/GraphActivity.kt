@@ -2,6 +2,7 @@ package com.test.cdcn_appmobile.ui.main.statistical.graph
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -110,7 +111,7 @@ class GraphActivity : AppCompatActivity() {
                 }
 
                 getListDrawerObject().observe(this@GraphActivity) {
-
+                    layoutDrawGraph.removeAllViews()
                     for (i in it) {
                         i.time =
                             if (getForDayMonth().value == true) "Tháng ${i.time}" else
@@ -119,7 +120,12 @@ class GraphActivity : AppCompatActivity() {
                         i.spendMoney /= 1_000
                     }
 
-                    val drawView = DrawView(this@GraphActivity, it)
+                    val drawView = DrawView(this@GraphActivity, it) {
+                        val tv = TextView(this@GraphActivity)
+                        layoutDrawGraph.addView(tv)
+                        layoutDrawGraph.removeView(tv)
+                        layoutDrawGraph.invalidate()
+                    }
                     layoutDrawGraph.addView(drawView)
                 }
 

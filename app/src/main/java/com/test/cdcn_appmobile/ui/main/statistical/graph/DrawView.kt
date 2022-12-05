@@ -3,7 +3,6 @@ package com.test.cdcn_appmobile.ui.main.statistical.graph
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
-import android.util.Log
 import android.view.View
 import com.test.cdcn_appmobile.R
 import com.test.cdcn_appmobile.data.models.DrawerObject
@@ -18,7 +17,8 @@ import com.test.cdcn_appmobile.extension.toStringNumber
 @SuppressLint("ViewConstructor")
 class DrawView(
     context: Context,
-    private val listDrawerObject: List<DrawerObject>
+    private val listDrawerObject: List<DrawerObject>,
+    private val onSuccessDraw: () -> Unit
 ) : View(context) {
 
     private val initX = 150f
@@ -46,7 +46,6 @@ class DrawView(
     init {
         var temp = 0L
 
-
         for (i in listDrawerObject) {
             if (i.getMaxMoney() > temp) {
                 temp = i.getMaxMoney()
@@ -66,7 +65,6 @@ class DrawView(
         rangeOfOne = 250f
         widthDrawMax = rangeOfOne * listDrawerObject.size + initX
 
-        Log.e("TTT", "$widthDrawMax: ", )
         textTitlePaint.apply {
             color = Color.BLACK
             textSize = 70f
@@ -119,7 +117,7 @@ class DrawView(
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-
+        layoutParams.width = widthDrawMax.toInt()
     }
 
     @SuppressLint("DrawAllocation")
@@ -127,7 +125,7 @@ class DrawView(
         super.onDraw(canvas)
 
         initGraphPath()
-        layoutParams.width = widthDrawMax.toInt()
+
         canvas?.run {
 
             drawColor(context.getColor(R.color.white))
@@ -172,6 +170,7 @@ class DrawView(
                 yDraw -= speedStep
 
             invalidate()
+            onSuccessDraw()
         }
 
     }
