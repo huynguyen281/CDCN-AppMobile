@@ -49,12 +49,15 @@ class GraphActivity : AppCompatActivity() {
             )[StatisticalViewModel::class.java]
 
         binding?.run {
+
             statisticalViewModel?.run {
-                setForDayMonth(intent.getBooleanExtra("forDayMonth", false))
 
                 getIdYearChosen().observe(this@GraphActivity) {
                     btnChoiceYearGraph.text = it.toString()
                     listYear.OnItemChoice(it)
+                    if (getForDayMonth().value == true) {
+                        loadData()
+                    }
                 }
 
                 getIdMonthChosen().observe(this@GraphActivity) {
@@ -83,23 +86,56 @@ class GraphActivity : AppCompatActivity() {
                 }
 
                 getForDayMonth().observe(this@GraphActivity) {
-
+                    tvTitle.text =
+                        if (it) "Đồ thị biểu diễn chi tiêu theo tháng" else "Đồ thị biểu diễn chi tiêu theo ngày"
+                    tvUnitMoney.text =
+                        if (it) "Trăm ngàn đồng" else "Ngàn đồng"
+                    if (it) {
+                        btnChoiceMonthGraph.run {
+                            isEnabled = !it
+                            text = ""
+                        }
+                        btnChoiceStarDay.run {
+                            isEnabled = !it
+                            text = ""
+                        }
+                        btnChoiceEndDay.run {
+                            isEnabled = !it
+                            text = ""
+                        }
+                    }
                 }
 
                 getListDrawerObject().observe(this@GraphActivity) {
+                    for (i in it) {
+                        i.receivedMoney /=
+                            if (getForDayMonth().value == true) 100_000 else 1_000
+                        i.spendMoney /=
+                            if (getForDayMonth().value == true) 100_000 else 1_000
+                    }
 
+                    val drawView = DrawView(this@GraphActivity, it)
+                    layoutDrawGraph.addView(drawView)
                 }
+
+                setForDayMonth(intent.getBooleanExtra("forDayMonth", false))
 
                 if (getIdYearChosen().value == null || getIdYearChosen().value == -1) {
                     setIdYearChosen(Calendar.getInstance().get(Calendar.YEAR))
                 }
-                if (getIdMonthChosen().value == null || getIdMonthChosen().value == -1) {
+                if ((getIdMonthChosen().value == null || getIdMonthChosen().value == -1)
+                    && getForDayMonth().value == false
+                ) {
                     setIdMonthChosen(Calendar.getInstance().get(Calendar.MONTH) + 1)
                 }
-                if (getIdDayStart().value == null || getIdDayStart().value == -1) {
+                if ((getIdDayStart().value == null || getIdDayStart().value == -1)
+                    && getForDayMonth().value == false
+                ) {
                     setIdDayStart(Calendar.getInstance().get(Calendar.DATE))
                 }
-                if (getIdDayEnd().value == null || getIdDayEnd().value == -1) {
+                if ((getIdDayEnd().value == null || getIdDayEnd().value == -1)
+                    && getForDayMonth().value == false
+                ) {
                     setIdDayEnd(Calendar.getInstance().get(Calendar.DATE))
                 }
             }
@@ -127,6 +163,7 @@ class GraphActivity : AppCompatActivity() {
                     .get(Calendar.DATE)
             )
         }
+
     }
 
     private fun initListener() {
@@ -208,7 +245,7 @@ class GraphActivity : AppCompatActivity() {
                 ItemChoice(
                     i,
                     i.toString(),
-                    i == statisticalViewModel?.getIdDayEnd()?.value
+                    i == idDayStart
                 )
             )
         }

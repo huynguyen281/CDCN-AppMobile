@@ -1,6 +1,7 @@
 package com.test.cdcn_appmobile.ui.dialog
 
 import android.app.Dialog
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -59,8 +60,11 @@ class ChoiceFragment(
     private fun setUp() {
         binding?.run {
             layoutMainChoice.layoutParams?.run {
+                val currentOrientation = resources.configuration.orientation
+
                 height = requireActivity().resources.displayMetrics.heightPixels * 7 / 10
-                width = requireActivity().resources.displayMetrics.widthPixels
+                if (currentOrientation != Configuration.ORIENTATION_LANDSCAPE)
+                    width = requireActivity().resources.displayMetrics.widthPixels
             }
             txtTileOption.text = title
             btnCancelChoice.setOnClickListener { dismiss() }
