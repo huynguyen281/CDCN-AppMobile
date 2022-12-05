@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.test.cdcn_appmobile.R
 import com.test.cdcn_appmobile.databinding.FragmentHomeBinding
-import com.test.cdcn_appmobile.extension.addFragment
 import com.test.cdcn_appmobile.extension.replaceFragment
 import com.test.cdcn_appmobile.ui.main.budget.BudgetFragment
 import com.test.cdcn_appmobile.ui.main.settings.SettingsFragment

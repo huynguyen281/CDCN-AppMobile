@@ -22,6 +22,7 @@ import com.test.cdcn_appmobile.extension.setVisibility
 import com.test.cdcn_appmobile.extension.toStringNumber
 import com.test.cdcn_appmobile.ui.dialog.ChoiceCategoryFragment
 import com.test.cdcn_appmobile.ui.dialog.DatePickerFragment
+import com.test.cdcn_appmobile.ui.main.budget.BudgetViewModel
 import com.test.cdcn_appmobile.utils.Constant
 import com.test.cdcn_appmobile.utils.InjectorUtil
 
@@ -88,7 +89,8 @@ class ExpenditureDetailFragment(
 
                     btnSave.text =
                         if (ex?.id == "") resources.getString(R.string.add) else resources.getString(
-                            R.string.update)
+                            R.string.update
+                        )
 
 
                     if (ex?.categoryType == 0) {
@@ -109,8 +111,10 @@ class ExpenditureDetailFragment(
                                 Editable.Factory.getInstance()
                                     .newEditable(edtCost.text.toString().replace(",", ""))
                             else Editable.Factory.getInstance()
-                                .newEditable(edtCost.text.toString().replace(",", "").toLong()
-                                    .toStringNumber())
+                                .newEditable(
+                                    edtCost.text.toString().replace(",", "").toLong()
+                                        .toStringNumber()
+                                )
                     }
                 }
 
@@ -145,8 +149,10 @@ class ExpenditureDetailFragment(
                         onChoiceFragHide = {
 
                         })
-                    choiceCategoryFragment?.show(requireActivity().supportFragmentManager,
-                        choiceCategoryFragment?.tag ?: "")
+                    choiceCategoryFragment?.show(
+                        requireActivity().supportFragmentManager,
+                        choiceCategoryFragment?.tag ?: ""
+                    )
                 }
 
                 radioSpent.setOnClickListener {
@@ -168,7 +174,8 @@ class ExpenditureDetailFragment(
 
                     builder.setMessage("Bạn có chắc muốn xóa chi tiêu ?")
 
-                    builder.setPositiveButton("Có"
+                    builder.setPositiveButton(
+                        "Có"
                     ) { dialog, _ ->
                         viewBg.setVisibility(true)
                         progressBar.setVisibility(true)
@@ -179,6 +186,7 @@ class ExpenditureDetailFragment(
                             ),
                             expenditure.id
                         ) { done, message ->
+                            BudgetViewModel.changeNewExpenditure()
                             dialog.dismiss()
                             context?.let {
                                 Toast.makeText(it, message, Toast.LENGTH_SHORT).show()
@@ -192,7 +200,8 @@ class ExpenditureDetailFragment(
                         }
                     }
 
-                    builder.setNegativeButton("Không"
+                    builder.setNegativeButton(
+                        "Không"
                     ) { dialog, _ -> dialog.dismiss() }
                     builder.show()
                 }
@@ -221,6 +230,7 @@ class ExpenditureDetailFragment(
                             Constant.USER.id,
                             expenditure
                         ) { done, message ->
+                            BudgetViewModel.changeNewExpenditure()
                             viewBg.setVisibility(false)
                             progressBar.setVisibility(false)
                             context?.let {
@@ -234,9 +244,11 @@ class ExpenditureDetailFragment(
 
                     } else {
                         context?.let {
-                            Toast.makeText(it,
+                            Toast.makeText(
+                                it,
                                 "Vui lòng xác nhận lượng tiền thu chi và chọn thể loại !!!",
-                                Toast.LENGTH_SHORT).show()
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }

@@ -20,11 +20,11 @@ class ExDetailViewModel(
 ) : ViewModel() {
 
     companion object {
-        private var isEditing = MutableLiveData<Boolean>()
-        private var expenditureDetail = MutableLiveData<Expenditure?>()
-        private var categoryType = MutableLiveData<Int>()
-        private var listCategory = MutableLiveData<MutableList<Category>?>()
-        private var idCategory = MutableLiveData<String?>()
+        private val isEditing = MutableLiveData<Boolean>()
+        private val expenditureDetail = MutableLiveData<Expenditure?>()
+        private val categoryType = MutableLiveData<Int>()
+        private val listCategory = MutableLiveData<MutableList<Category>?>()
+        private val idCategory = MutableLiveData<String?>()
     }
 
     init {

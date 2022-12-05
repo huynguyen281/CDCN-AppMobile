@@ -256,7 +256,9 @@ class TransactionsFragment : Fragment() {
                 i == transactionsViewModel?.getIdDayChosen()?.value))
         }
         transactionsViewModel?.setIdDayChosen(transactionsViewModel?.getIdDayChosen()?.value ?: 0)
-        binding?.rclViewDay?.scrollToPosition((transactionsViewModel?.getIdDayChosen()?.value ?: 1) - 1)
+        binding?.run {
+            rclViewDay.scrollToPosition((transactionsViewModel?.getIdDayChosen()?.value ?: 1) - 1)
+        }
         dayPickerAdapter?.notifyDataSetChanged()
     }
 

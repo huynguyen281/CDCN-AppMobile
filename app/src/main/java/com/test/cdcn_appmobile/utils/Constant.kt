@@ -12,7 +12,7 @@ object Constant {
 
     private var gson = GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create()
 
-    const val baseURL = "https://ef99-14-236-173-239.ap.ngrok.io"
+    const val baseURL = "https://9150-2a09-bac1-7ac0-30-00-247-5f.ap.ngrok.io"
     private val builder = Retrofit.Builder()
         .baseUrl(baseURL)
         .addConverterFactory(GsonConverterFactory.create(gson))

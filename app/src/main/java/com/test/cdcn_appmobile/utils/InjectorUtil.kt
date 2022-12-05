@@ -1,12 +1,13 @@
 package com.test.cdcn_appmobile.utils
 
 import com.test.cdcn_appmobile.data.repository.BudgetRepository
+import com.test.cdcn_appmobile.data.repository.DrawerRepository
 import com.test.cdcn_appmobile.data.repository.ExpenditureRepository
 import com.test.cdcn_appmobile.data.repository.UserRepository
 import com.test.cdcn_appmobile.ui.launch.LaunchViewModelFactory
 import com.test.cdcn_appmobile.ui.main.budget.BudgetViewModelFactory
-import com.test.cdcn_appmobile.ui.main.settings.UserViewModel
 import com.test.cdcn_appmobile.ui.main.settings.UserViewModelFactory
+import com.test.cdcn_appmobile.ui.main.statistical.StatisticalViewModelFactory
 import com.test.cdcn_appmobile.ui.main.transactions.TransactionsViewModelFactory
 import com.test.cdcn_appmobile.ui.main.transactions.detail.ExDetailViewModelFactory
 
@@ -34,5 +35,9 @@ object InjectorUtil {
 
     fun provideUserViewModelFactory(): UserViewModelFactory {
         return UserViewModelFactory(UserRepository)
+    }
+
+    fun statisticalViewModelFactory(): StatisticalViewModelFactory {
+        return StatisticalViewModelFactory(DrawerRepository)
     }
 }
