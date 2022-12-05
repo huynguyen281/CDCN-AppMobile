@@ -3,10 +3,13 @@ package com.test.cdcn_appmobile.ui.main.statistical.graph
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
+import android.util.Log
 import android.view.View
 import com.test.cdcn_appmobile.R
 import com.test.cdcn_appmobile.data.models.DrawerObject
 import com.test.cdcn_appmobile.extension.getHeight
+import com.test.cdcn_appmobile.extension.toStringNumber
+
 
 /*
  * Created by tuyen.dang on 12/4/2022
@@ -19,7 +22,7 @@ class DrawView(
 ) : View(context) {
 
     private val initX = 150f
-    private val initY = context.getHeight() * 7 / 10 - 50
+    private val initY = context.getHeight() * 7 / 10 - 100
 
     private var textTitlePaint: Paint = Paint()
     private var textValueOXYPaint: Paint = Paint()
@@ -43,6 +46,7 @@ class DrawView(
     init {
         var temp = 0L
 
+
         for (i in listDrawerObject) {
             if (i.getMaxMoney() > temp) {
                 temp = i.getMaxMoney()
@@ -62,6 +66,7 @@ class DrawView(
         rangeOfOne = 250f
         widthDrawMax = rangeOfOne * listDrawerObject.size + initX
 
+        Log.e("TTT", "$widthDrawMax: ", )
         textTitlePaint.apply {
             color = Color.BLACK
             textSize = 70f
@@ -114,7 +119,7 @@ class DrawView(
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        layoutParams.width = widthDrawMax.toInt()
+
     }
 
     @SuppressLint("DrawAllocation")
@@ -122,15 +127,18 @@ class DrawView(
         super.onDraw(canvas)
 
         initGraphPath()
-
+        layoutParams.width = widthDrawMax.toInt()
         canvas?.run {
+
+            drawColor(context.getColor(R.color.white))
+
             drawPath(graphPath, grayPaintBrushStroke)
 
             listPointUnitLine.forEachIndexed { index, element ->
                 drawPath(pathUnitLine(element), grayPaintBrushStroke)
                 if (yDraw < element) {
                     drawText(
-                        (stepRange * index * coefficient).toString(),
+                        (stepRange * index * coefficient).toStringNumber(),
                         initX - 50,
                         element + 10f,
                         textValueOXYPaint

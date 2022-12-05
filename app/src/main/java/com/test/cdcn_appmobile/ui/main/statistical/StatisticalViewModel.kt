@@ -25,6 +25,10 @@ class StatisticalViewModel(private val drawerRepository: DrawerRepository) : Vie
     private val idYearChosen: MutableLiveData<Int> = MutableLiveData<Int>()
     private val forDayMonth: MutableLiveData<Boolean> = MutableLiveData<Boolean>()
 
+    init {
+        listDrawerObject.value = mutableListOf()
+    }
+
     fun getListDrawerObject(): MutableLiveData<MutableList<DrawerObject>> = listDrawerObject
 
     fun getIdDayStart(): LiveData<Int> = idDayStart
@@ -66,7 +70,7 @@ class StatisticalViewModel(private val drawerRepository: DrawerRepository) : Vie
             val options: MutableMap<String, String> = HashMap()
             options["id"] = idUser
             if (forDayMonth.value == true) {
-                options["year"] = idYearChosen.toString()
+                options["year"] = idYearChosen.value.toString()
                 drawerRepository.getDrawObjectByYear(
                     authToken,
                     options

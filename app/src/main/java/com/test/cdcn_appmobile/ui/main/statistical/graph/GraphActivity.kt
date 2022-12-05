@@ -1,5 +1,6 @@
 package com.test.cdcn_appmobile.ui.main.statistical.graph
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,7 @@ import com.test.cdcn_appmobile.data.models.ItemChoice
 import com.test.cdcn_appmobile.databinding.ActivityGraphBinding
 import com.test.cdcn_appmobile.extension.OnItemChoice
 import com.test.cdcn_appmobile.extension.setVisibility
+import com.test.cdcn_appmobile.extension.toSingleDay
 import com.test.cdcn_appmobile.ui.dialog.ChoiceFragment
 import com.test.cdcn_appmobile.ui.main.statistical.StatisticalViewModel
 import com.test.cdcn_appmobile.utils.Constant
@@ -40,6 +42,7 @@ class GraphActivity : AppCompatActivity() {
         initListener()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initView() {
 
         statisticalViewModel =
@@ -82,14 +85,14 @@ class GraphActivity : AppCompatActivity() {
 
                 getIdDayEnd().observe(this@GraphActivity) {
                     btnChoiceEndDay.text = it.toString()
+                    listDayEnd.OnItemChoice(it)
                     loadData()
                 }
 
                 getForDayMonth().observe(this@GraphActivity) {
                     tvTitle.text =
                         if (it) "Đồ thị biểu diễn chi tiêu theo tháng" else "Đồ thị biểu diễn chi tiêu theo ngày"
-                    tvUnitMoney.text =
-                        if (it) "Trăm ngàn đồng" else "Ngàn đồng"
+                    tvUnitMoney.text = "Ngàn đồng"
                     if (it) {
                         btnChoiceMonthGraph.run {
                             isEnabled = !it
@@ -107,11 +110,13 @@ class GraphActivity : AppCompatActivity() {
                 }
 
                 getListDrawerObject().observe(this@GraphActivity) {
+
                     for (i in it) {
-                        i.receivedMoney /=
-                            if (getForDayMonth().value == true) 100_000 else 1_000
-                        i.spendMoney /=
-                            if (getForDayMonth().value == true) 100_000 else 1_000
+                        i.time =
+                            if (getForDayMonth().value == true) "Tháng ${i.time}" else
+                                "Ngày ${i.time.split("-")[0].toSingleDay()}"
+                        i.receivedMoney /= 1_000
+                        i.spendMoney /= 1_000
                     }
 
                     val drawView = DrawView(this@GraphActivity, it)
@@ -191,7 +196,7 @@ class GraphActivity : AppCompatActivity() {
             }
 
             btnChoiceEndDay.setOnClickListener {
-                openDialogChoice("Ngày bắt đầu", listDayEnd) { idChosen ->
+                openDialogChoice("Ngày kết thúc", listDayEnd) { idChosen ->
                     statisticalViewModel?.setIdDayEnd(idChosen)
                 }
             }
@@ -245,12 +250,12 @@ class GraphActivity : AppCompatActivity() {
                 ItemChoice(
                     i,
                     i.toString(),
-                    i == idDayStart
+                    i == statisticalViewModel?.getIdDayEnd()?.value
                 )
             )
         }
 
-        statisticalViewModel?.setIdDayEnd(idDayStart)
+        statisticalViewModel?.setIdDayEnd(statisticalViewModel?.getIdDayEnd()?.value ?: idDayStart)
     }
 
     private fun openDialogChoice(
