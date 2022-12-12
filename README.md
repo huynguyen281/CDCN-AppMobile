@@ -16,7 +16,7 @@ https://user-images.githubusercontent.com/81175462/207091133-0528a1ba-aadf-45fe-
 
 https://user-images.githubusercontent.com/81175462/207092843-f6e8e1b9-a48b-40b5-bc60-0cc47a4756e5.mp4
 
-4. Xem chi tiêu theo ngày của tháng, theo tháng của 
+4. Xem chi tiêu theo ngày của tháng, theo tháng của năm
 
 https://user-images.githubusercontent.com/81175462/207098934-cc60011c-c0d1-4f23-bca5-4e4abfd30f45.mov
 
