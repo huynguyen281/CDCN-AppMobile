@@ -190,7 +190,7 @@ class GraphActivity : AppCompatActivity() {
             }
 
             btnChoiceMonthGraph.setOnClickListener {
-                openDialogChoice("Năm", listMonth) { idChosen ->
+                openDialogChoice("Tháng", listMonth) { idChosen ->
                     statisticalViewModel?.setIdMonthChosen(idChosen)
                 }
             }
@@ -261,7 +261,13 @@ class GraphActivity : AppCompatActivity() {
             )
         }
 
-        statisticalViewModel?.setIdDayEnd(statisticalViewModel?.getIdDayEnd()?.value ?: idDayStart)
+        if ((statisticalViewModel?.getIdDayEnd()?.value ?: 0) > day) {
+            statisticalViewModel?.setIdDayEnd(idDayStart)
+        } else {
+            statisticalViewModel?.setIdDayEnd(
+                statisticalViewModel?.getIdDayEnd()?.value ?: idDayStart
+            )
+        }
     }
 
     private fun openDialogChoice(
