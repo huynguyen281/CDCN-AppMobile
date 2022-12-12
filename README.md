@@ -18,5 +18,5 @@ https://user-images.githubusercontent.com/81175462/207092843-f6e8e1b9-a48b-40b5-
 
 4. Xem chi tiêu theo ngày của tháng, theo tháng của 
 
-https://user-images.githubusercontent.com/81175462/207097693-e0a8b7bb-3094-4041-b121-20a63d19d6da.mp4
+https://user-images.githubusercontent.com/81175462/207098934-cc60011c-c0d1-4f23-bca5-4e4abfd30f45.mov
 
