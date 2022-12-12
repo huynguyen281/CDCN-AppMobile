@@ -2,7 +2,7 @@
 ## Nhóm 1
 ## Sinh viên thực hiện app mobile: Đặng Thanh Tuyên, Lưu Yến Nhi 
 
-###Video demo:
+### Video demo:
 
 1. Đăng nhập, đăng ký và hiển thị sơ qua các màn hình chính:
 
@@ -15,4 +15,8 @@ https://user-images.githubusercontent.com/81175462/207091133-0528a1ba-aadf-45fe-
 3. Xem chi tiêu theo ngày/tháng/năm, thêm chi tiêu/thu nhập trong ngày, chỉnh sửa hạn mức và hiển thị tình trạng tài chính chung
 
 https://user-images.githubusercontent.com/81175462/207092843-f6e8e1b9-a48b-40b5-bc60-0cc47a4756e5.mp4
+
+4. Xem chi tiêu theo ngày của tháng, theo tháng của 
+
+https://user-images.githubusercontent.com/81175462/207097693-e0a8b7bb-3094-4041-b121-20a63d19d6da.mp4
 
