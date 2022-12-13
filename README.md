@@ -1,4 +1,5 @@
 # 19N11 - TEAM 14 - Finance: Expense Management
+# App mobile Repository
 
 ## Sinh viên thực hiện app mobile: Đặng Thanh Tuyên, Lưu Yến Nhi 
 
