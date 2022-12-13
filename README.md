@@ -1,4 +1,4 @@
-# App Mobile: Quản lý chi tiêu
+# 19N11 - TEAM 14 - Finance: Expense Management
 ## Nhóm 1
 ## Sinh viên thực hiện app mobile: Đặng Thanh Tuyên, Lưu Yến Nhi 
 
