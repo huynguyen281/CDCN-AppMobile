@@ -94,16 +94,16 @@ class LoginFragment : Fragment() {
                         onStart = {
                             viewBg.setVisibility(true)
                             progressBar.setVisibility(true)
-                            layoutUser.setVisibility(false)
-                            layoutPass.setVisibility(false)
-                            tvForgotpassOpen.setVisibility(false)
+                            //layoutUser.setVisibility(false)
+                            //layoutPass.setVisibility(false)
+                            //tvForgotpassOpen.setVisibility(false)
                         },
                         onResult = { done, message ->
                             viewBg.setVisibility(false)
                             progressBar.setVisibility(false)
-                            layoutUser.setVisibility(true)
-                            layoutPass.setVisibility(true)
-                            tvForgotpassOpen.setVisibility(true)
+                            //layoutUser.setVisibility(true)
+                            //layoutPass.setVisibility(true)
+                            //tvForgotpassOpen.setVisibility(true)
                             if (done) {
                                 requireActivity().replaceFragment(
                                     R.id.ctReplaceFragment,

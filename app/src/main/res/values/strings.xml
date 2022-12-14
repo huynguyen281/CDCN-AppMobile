@@ -40,8 +40,8 @@
     <!--    FragmentDetail-->
     <string name="add">Thêm chi tiêu</string>
     <string name="update">Cập nhật chi tiêu</string>
-    <string name="emptyList">Bạn chưa có chi tiêu trong ngày này !!!</string>
-    <string name="choiceType">Chọn thể loại chi tiêu !!!</string>
+    <string name="emptyList">Bạn chưa có chi tiêu trong ngày này</string>
+    <string name="choiceType">Chọn loại chi tiêu</string>
     <string name="howMuchMoney">Số tiền đã chi tiêu</string>
     <string name="note">Ghi chú</string>
 
