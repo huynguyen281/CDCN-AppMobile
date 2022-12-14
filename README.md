@@ -21,3 +21,7 @@ https://user-images.githubusercontent.com/81175462/207092843-f6e8e1b9-a48b-40b5-
 
 https://user-images.githubusercontent.com/81175462/207098934-cc60011c-c0d1-4f23-bca5-4e4abfd30f45.mov
 
+## Slide deck
+
+### [Finance: Expense Management](https://www.canva.com/design/DAFUpWKO-go/FyqJjsdAkKqirmMqcUCFPA/edit?utm_content=DAFUpWKO-go&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton&fbclid=IwAR0hfuxsfr5cYSywOTjhMYPrl4vTutWrwQX4rRfhF8oBPhnmAy5Y6kpAoiM)
+
